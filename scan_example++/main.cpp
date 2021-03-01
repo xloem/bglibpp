@@ -118,7 +118,7 @@ public:
         }
     }
 
-    void output(uint8 len1,uint8* data1,uint16 len2,uint8* data2)
+    void output(uint8_t len1,uint8_t* data1,uint16_t len2,uint8_t* data2)
     {
         int result;
         if((result = write(serial_handle, data1, len1)) != len1)

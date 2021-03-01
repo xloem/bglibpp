@@ -11,7 +11,7 @@
  *      BGLIB uses PACKSTRUCT macro to add packing information for structures:
  *      PACKSTRUCT(struct wifi_msg_dfu_reset_cmd_t
  *      {
- *          uint8	dfu;
+ *          uint8_t	dfu;
  *      });
  *
  *
@@ -50,23 +50,23 @@ class ble;
 typedef void (ble::*ble_cmd_handler)(const void*);
 struct ble_header
 {
-    uint8  type_hilen;
-    uint8  lolen;
-    uint8  cls;
-    uint8  command;
+    uint8_t  type_hilen;
+    uint8_t  lolen;
+    uint8_t  cls;
+    uint8_t  command;
 };
 
 
 struct ble_msg
 {
     struct ble_header    hdr;
-    uint32               params;
+    uint32_t               params;
     ble_cmd_handler       handler;
 };       
 
 const struct ble_msg * ble_find_msg_hdr(struct ble_header hdr);
 const struct ble_msg * ble_find_msg_hdr_r(struct ble_header hdr);
-const struct ble_msg * ble_get_msg(uint8 idx) ;
+const struct ble_msg * ble_get_msg(uint8_t idx) ;
 const struct ble_msg * ble_get_msg_hdr(struct ble_header hdr) ;
 
 enum system_endpoints
@@ -859,7 +859,7 @@ typedef enum ble_error
 #endif
 PACKSTRUCT(struct ble_msg_system_reset_cmd_t
 {
-	uint8	boot_in_dfu;
+	uint8_t	boot_in_dfu;
 });
 
 PACKSTRUCT(struct ble_msg_system_address_get_rsp_t
@@ -869,118 +869,118 @@ PACKSTRUCT(struct ble_msg_system_address_get_rsp_t
 
 PACKSTRUCT(struct ble_msg_system_reg_write_cmd_t
 {
-	uint16	address;
-	uint8	value;
+	uint16_t	address;
+	uint8_t	value;
 });
 
 PACKSTRUCT(struct ble_msg_system_reg_write_rsp_t
 {
-	uint16	result;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_system_reg_read_cmd_t
 {
-	uint16	address;
+	uint16_t	address;
 });
 
 PACKSTRUCT(struct ble_msg_system_reg_read_rsp_t
 {
-	uint16	address;
-	uint8	value;
+	uint16_t	address;
+	uint8_t	value;
 });
 
 PACKSTRUCT(struct ble_msg_system_get_counters_rsp_t
 {
-	uint8	txok;
-	uint8	txretry;
-	uint8	rxok;
-	uint8	rxfail;
-	uint8	mbuf;
+	uint8_t	txok;
+	uint8_t	txretry;
+	uint8_t	rxok;
+	uint8_t	rxfail;
+	uint8_t	mbuf;
 });
 
 PACKSTRUCT(struct ble_msg_system_get_connections_rsp_t
 {
-	uint8	maxconn;
+	uint8_t	maxconn;
 });
 
 PACKSTRUCT(struct ble_msg_system_read_memory_cmd_t
 {
-	uint32	address;
-	uint8	length;
+	uint32_t	address;
+	uint8_t	length;
 });
 
 PACKSTRUCT(struct ble_msg_system_read_memory_rsp_t
 {
-	uint32	address;
+	uint32_t	address;
 	uint8array	data;
 });
 
 PACKSTRUCT(struct ble_msg_system_get_info_rsp_t
 {
-	uint16	major;
-	uint16	minor;
-	uint16	patch;
-	uint16	build;
-	uint16	ll_version;
-	uint8	protocol_version;
-	uint8	hw;
+	uint16_t	major;
+	uint16_t	minor;
+	uint16_t	patch;
+	uint16_t	build;
+	uint16_t	ll_version;
+	uint8_t	protocol_version;
+	uint8_t	hw;
 });
 
 PACKSTRUCT(struct ble_msg_system_endpoint_tx_cmd_t
 {
-	uint8	endpoint;
+	uint8_t	endpoint;
 	uint8array	data;
 });
 
 PACKSTRUCT(struct ble_msg_system_endpoint_tx_rsp_t
 {
-	uint16	result;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_system_whitelist_append_cmd_t
 {
 	bd_addr	address;
-	uint8	address_type;
+	uint8_t	address_type;
 });
 
 PACKSTRUCT(struct ble_msg_system_whitelist_append_rsp_t
 {
-	uint16	result;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_system_whitelist_remove_cmd_t
 {
 	bd_addr	address;
-	uint8	address_type;
+	uint8_t	address_type;
 });
 
 PACKSTRUCT(struct ble_msg_system_whitelist_remove_rsp_t
 {
-	uint16	result;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_system_endpoint_rx_cmd_t
 {
-	uint8	endpoint;
-	uint8	size;
+	uint8_t	endpoint;
+	uint8_t	size;
 });
 
 PACKSTRUCT(struct ble_msg_system_endpoint_rx_rsp_t
 {
-	uint16	result;
+	uint16_t	result;
 	uint8array	data;
 });
 
 PACKSTRUCT(struct ble_msg_system_endpoint_set_watermarks_cmd_t
 {
-	uint8	endpoint;
-	uint8	rx;
-	uint8	tx;
+	uint8_t	endpoint;
+	uint8_t	rx;
+	uint8_t	tx;
 });
 
 PACKSTRUCT(struct ble_msg_system_endpoint_set_watermarks_rsp_t
 {
-	uint16	result;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_system_aes_setkey_cmd_t
@@ -1010,13 +1010,13 @@ PACKSTRUCT(struct ble_msg_system_aes_decrypt_rsp_t
 
 PACKSTRUCT(struct ble_msg_system_boot_evt_t
 {
-	uint16	major;
-	uint16	minor;
-	uint16	patch;
-	uint16	build;
-	uint16	ll_version;
-	uint8	protocol_version;
-	uint8	hw;
+	uint16_t	major;
+	uint16_t	minor;
+	uint16_t	patch;
+	uint16_t	build;
+	uint16_t	ll_version;
+	uint8_t	protocol_version;
+	uint8_t	hw;
 });
 
 PACKSTRUCT(struct ble_msg_system_debug_evt_t
@@ -1026,79 +1026,79 @@ PACKSTRUCT(struct ble_msg_system_debug_evt_t
 
 PACKSTRUCT(struct ble_msg_system_endpoint_watermark_rx_evt_t
 {
-	uint8	endpoint;
-	uint8	data;
+	uint8_t	endpoint;
+	uint8_t	data;
 });
 
 PACKSTRUCT(struct ble_msg_system_endpoint_watermark_tx_evt_t
 {
-	uint8	endpoint;
-	uint8	data;
+	uint8_t	endpoint;
+	uint8_t	data;
 });
 
 PACKSTRUCT(struct ble_msg_system_script_failure_evt_t
 {
-	uint16	address;
-	uint16	reason;
+	uint16_t	address;
+	uint16_t	reason;
 });
 
 PACKSTRUCT(struct ble_msg_system_protocol_error_evt_t
 {
-	uint16	reason;
+	uint16_t	reason;
 });
 
 PACKSTRUCT(struct ble_msg_flash_ps_save_cmd_t
 {
-	uint16	key;
+	uint16_t	key;
 	uint8array	value;
 });
 
 PACKSTRUCT(struct ble_msg_flash_ps_save_rsp_t
 {
-	uint16	result;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_flash_ps_load_cmd_t
 {
-	uint16	key;
+	uint16_t	key;
 });
 
 PACKSTRUCT(struct ble_msg_flash_ps_load_rsp_t
 {
-	uint16	result;
+	uint16_t	result;
 	uint8array	value;
 });
 
 PACKSTRUCT(struct ble_msg_flash_ps_erase_cmd_t
 {
-	uint16	key;
+	uint16_t	key;
 });
 
 PACKSTRUCT(struct ble_msg_flash_erase_page_cmd_t
 {
-	uint8	page;
+	uint8_t	page;
 });
 
 PACKSTRUCT(struct ble_msg_flash_erase_page_rsp_t
 {
-	uint16	result;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_flash_write_data_cmd_t
 {
-	uint32	address;
+	uint32_t	address;
 	uint8array	data;
 });
 
 PACKSTRUCT(struct ble_msg_flash_write_data_rsp_t
 {
-	uint16	result;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_flash_read_data_cmd_t
 {
-	uint32	address;
-	uint8	length;
+	uint32_t	address;
+	uint8_t	length;
 });
 
 PACKSTRUCT(struct ble_msg_flash_read_data_rsp_t
@@ -1108,500 +1108,500 @@ PACKSTRUCT(struct ble_msg_flash_read_data_rsp_t
 
 PACKSTRUCT(struct ble_msg_flash_ps_key_evt_t
 {
-	uint16	key;
+	uint16_t	key;
 	uint8array	value;
 });
 
 PACKSTRUCT(struct ble_msg_attributes_write_cmd_t
 {
-	uint16	handle;
-	uint8	offset;
+	uint16_t	handle;
+	uint8_t	offset;
 	uint8array	value;
 });
 
 PACKSTRUCT(struct ble_msg_attributes_write_rsp_t
 {
-	uint16	result;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_attributes_read_cmd_t
 {
-	uint16	handle;
-	uint16	offset;
+	uint16_t	handle;
+	uint16_t	offset;
 });
 
 PACKSTRUCT(struct ble_msg_attributes_read_rsp_t
 {
-	uint16	handle;
-	uint16	offset;
-	uint16	result;
+	uint16_t	handle;
+	uint16_t	offset;
+	uint16_t	result;
 	uint8array	value;
 });
 
 PACKSTRUCT(struct ble_msg_attributes_read_type_cmd_t
 {
-	uint16	handle;
+	uint16_t	handle;
 });
 
 PACKSTRUCT(struct ble_msg_attributes_read_type_rsp_t
 {
-	uint16	handle;
-	uint16	result;
+	uint16_t	handle;
+	uint16_t	result;
 	uint8array	value;
 });
 
 PACKSTRUCT(struct ble_msg_attributes_user_read_response_cmd_t
 {
-	uint8	connection;
-	uint8	att_error;
+	uint8_t	connection;
+	uint8_t	att_error;
 	uint8array	value;
 });
 
 PACKSTRUCT(struct ble_msg_attributes_user_write_response_cmd_t
 {
-	uint8	connection;
-	uint8	att_error;
+	uint8_t	connection;
+	uint8_t	att_error;
 });
 
 PACKSTRUCT(struct ble_msg_attributes_send_cmd_t
 {
-	uint8	connection;
-	uint16	handle;
+	uint8_t	connection;
+	uint16_t	handle;
 	uint8array	value;
 });
 
 PACKSTRUCT(struct ble_msg_attributes_send_rsp_t
 {
-	uint16	result;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_attributes_value_evt_t
 {
-	uint8	connection;
-	uint8	reason;
-	uint16	handle;
-	uint16	offset;
+	uint8_t	connection;
+	uint8_t	reason;
+	uint16_t	handle;
+	uint16_t	offset;
 	uint8array	value;
 });
 
 PACKSTRUCT(struct ble_msg_attributes_user_read_request_evt_t
 {
-	uint8	connection;
-	uint16	handle;
-	uint16	offset;
-	uint8	maxsize;
+	uint8_t	connection;
+	uint16_t	handle;
+	uint16_t	offset;
+	uint8_t	maxsize;
 });
 
 PACKSTRUCT(struct ble_msg_attributes_status_evt_t
 {
-	uint16	handle;
-	uint8	flags;
+	uint16_t	handle;
+	uint8_t	flags;
 });
 
 PACKSTRUCT(struct ble_msg_connection_disconnect_cmd_t
 {
-	uint8	connection;
+	uint8_t	connection;
 });
 
 PACKSTRUCT(struct ble_msg_connection_disconnect_rsp_t
 {
-	uint8	connection;
-	uint16	result;
+	uint8_t	connection;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_connection_get_rssi_cmd_t
 {
-	uint8	connection;
+	uint8_t	connection;
 });
 
 PACKSTRUCT(struct ble_msg_connection_get_rssi_rsp_t
 {
-	uint8	connection;
-	int8	rssi;
+	uint8_t	connection;
+	int8_t	rssi;
 });
 
 PACKSTRUCT(struct ble_msg_connection_update_cmd_t
 {
-	uint8	connection;
-	uint16	interval_min;
-	uint16	interval_max;
-	uint16	latency;
-	uint16	timeout;
+	uint8_t	connection;
+	uint16_t	interval_min;
+	uint16_t	interval_max;
+	uint16_t	latency;
+	uint16_t	timeout;
 });
 
 PACKSTRUCT(struct ble_msg_connection_update_rsp_t
 {
-	uint8	connection;
-	uint16	result;
+	uint8_t	connection;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_connection_version_update_cmd_t
 {
-	uint8	connection;
+	uint8_t	connection;
 });
 
 PACKSTRUCT(struct ble_msg_connection_version_update_rsp_t
 {
-	uint8	connection;
-	uint16	result;
+	uint8_t	connection;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_connection_channel_map_get_cmd_t
 {
-	uint8	connection;
+	uint8_t	connection;
 });
 
 PACKSTRUCT(struct ble_msg_connection_channel_map_get_rsp_t
 {
-	uint8	connection;
+	uint8_t	connection;
 	uint8array	map;
 });
 
 PACKSTRUCT(struct ble_msg_connection_channel_map_set_cmd_t
 {
-	uint8	connection;
+	uint8_t	connection;
 	uint8array	map;
 });
 
 PACKSTRUCT(struct ble_msg_connection_channel_map_set_rsp_t
 {
-	uint8	connection;
-	uint16	result;
+	uint8_t	connection;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_connection_features_get_cmd_t
 {
-	uint8	connection;
+	uint8_t	connection;
 });
 
 PACKSTRUCT(struct ble_msg_connection_features_get_rsp_t
 {
-	uint8	connection;
-	uint16	result;
+	uint8_t	connection;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_connection_get_status_cmd_t
 {
-	uint8	connection;
+	uint8_t	connection;
 });
 
 PACKSTRUCT(struct ble_msg_connection_get_status_rsp_t
 {
-	uint8	connection;
+	uint8_t	connection;
 });
 
 PACKSTRUCT(struct ble_msg_connection_raw_tx_cmd_t
 {
-	uint8	connection;
+	uint8_t	connection;
 	uint8array	data;
 });
 
 PACKSTRUCT(struct ble_msg_connection_raw_tx_rsp_t
 {
-	uint8	connection;
+	uint8_t	connection;
 });
 
 PACKSTRUCT(struct ble_msg_connection_slave_latency_disable_cmd_t
 {
-	uint8	disable;
+	uint8_t	disable;
 });
 
 PACKSTRUCT(struct ble_msg_connection_slave_latency_disable_rsp_t
 {
-	uint16	result;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_connection_status_evt_t
 {
-	uint8	connection;
-	uint8	flags;
+	uint8_t	connection;
+	uint8_t	flags;
 	bd_addr	address;
-	uint8	address_type;
-	uint16	conn_interval;
-	uint16	timeout;
-	uint16	latency;
-	uint8	bonding;
+	uint8_t	address_type;
+	uint16_t	conn_interval;
+	uint16_t	timeout;
+	uint16_t	latency;
+	uint8_t	bonding;
 });
 
 PACKSTRUCT(struct ble_msg_connection_version_ind_evt_t
 {
-	uint8	connection;
-	uint8	vers_nr;
-	uint16	comp_id;
-	uint16	sub_vers_nr;
+	uint8_t	connection;
+	uint8_t	vers_nr;
+	uint16_t	comp_id;
+	uint16_t	sub_vers_nr;
 });
 
 PACKSTRUCT(struct ble_msg_connection_feature_ind_evt_t
 {
-	uint8	connection;
+	uint8_t	connection;
 	uint8array	features;
 });
 
 PACKSTRUCT(struct ble_msg_connection_raw_rx_evt_t
 {
-	uint8	connection;
+	uint8_t	connection;
 	uint8array	data;
 });
 
 PACKSTRUCT(struct ble_msg_connection_disconnected_evt_t
 {
-	uint8	connection;
-	uint16	reason;
+	uint8_t	connection;
+	uint16_t	reason;
 });
 
 PACKSTRUCT(struct ble_msg_attclient_find_by_type_value_cmd_t
 {
-	uint8	connection;
-	uint16	start;
-	uint16	end;
-	uint16	uuid;
+	uint8_t	connection;
+	uint16_t	start;
+	uint16_t	end;
+	uint16_t	uuid;
 	uint8array	value;
 });
 
 PACKSTRUCT(struct ble_msg_attclient_find_by_type_value_rsp_t
 {
-	uint8	connection;
-	uint16	result;
+	uint8_t	connection;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_attclient_read_by_group_type_cmd_t
 {
-	uint8	connection;
-	uint16	start;
-	uint16	end;
+	uint8_t	connection;
+	uint16_t	start;
+	uint16_t	end;
 	uint8array	uuid;
 });
 
 PACKSTRUCT(struct ble_msg_attclient_read_by_group_type_rsp_t
 {
-	uint8	connection;
-	uint16	result;
+	uint8_t	connection;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_attclient_read_by_type_cmd_t
 {
-	uint8	connection;
-	uint16	start;
-	uint16	end;
+	uint8_t	connection;
+	uint16_t	start;
+	uint16_t	end;
 	uint8array	uuid;
 });
 
 PACKSTRUCT(struct ble_msg_attclient_read_by_type_rsp_t
 {
-	uint8	connection;
-	uint16	result;
+	uint8_t	connection;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_attclient_find_information_cmd_t
 {
-	uint8	connection;
-	uint16	start;
-	uint16	end;
+	uint8_t	connection;
+	uint16_t	start;
+	uint16_t	end;
 });
 
 PACKSTRUCT(struct ble_msg_attclient_find_information_rsp_t
 {
-	uint8	connection;
-	uint16	result;
+	uint8_t	connection;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_attclient_read_by_handle_cmd_t
 {
-	uint8	connection;
-	uint16	chrhandle;
+	uint8_t	connection;
+	uint16_t	chrhandle;
 });
 
 PACKSTRUCT(struct ble_msg_attclient_read_by_handle_rsp_t
 {
-	uint8	connection;
-	uint16	result;
+	uint8_t	connection;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_attclient_attribute_write_cmd_t
 {
-	uint8	connection;
-	uint16	atthandle;
+	uint8_t	connection;
+	uint16_t	atthandle;
 	uint8array	data;
 });
 
 PACKSTRUCT(struct ble_msg_attclient_attribute_write_rsp_t
 {
-	uint8	connection;
-	uint16	result;
+	uint8_t	connection;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_attclient_write_command_cmd_t
 {
-	uint8	connection;
-	uint16	atthandle;
+	uint8_t	connection;
+	uint16_t	atthandle;
 	uint8array	data;
 });
 
 PACKSTRUCT(struct ble_msg_attclient_write_command_rsp_t
 {
-	uint8	connection;
-	uint16	result;
+	uint8_t	connection;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_attclient_indicate_confirm_cmd_t
 {
-	uint8	connection;
+	uint8_t	connection;
 });
 
 PACKSTRUCT(struct ble_msg_attclient_indicate_confirm_rsp_t
 {
-	uint16	result;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_attclient_read_long_cmd_t
 {
-	uint8	connection;
-	uint16	chrhandle;
+	uint8_t	connection;
+	uint16_t	chrhandle;
 });
 
 PACKSTRUCT(struct ble_msg_attclient_read_long_rsp_t
 {
-	uint8	connection;
-	uint16	result;
+	uint8_t	connection;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_attclient_prepare_write_cmd_t
 {
-	uint8	connection;
-	uint16	atthandle;
-	uint16	offset;
+	uint8_t	connection;
+	uint16_t	atthandle;
+	uint16_t	offset;
 	uint8array	data;
 });
 
 PACKSTRUCT(struct ble_msg_attclient_prepare_write_rsp_t
 {
-	uint8	connection;
-	uint16	result;
+	uint8_t	connection;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_attclient_execute_write_cmd_t
 {
-	uint8	connection;
-	uint8	commit;
+	uint8_t	connection;
+	uint8_t	commit;
 });
 
 PACKSTRUCT(struct ble_msg_attclient_execute_write_rsp_t
 {
-	uint8	connection;
-	uint16	result;
+	uint8_t	connection;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_attclient_read_multiple_cmd_t
 {
-	uint8	connection;
+	uint8_t	connection;
 	uint8array	handles;
 });
 
 PACKSTRUCT(struct ble_msg_attclient_read_multiple_rsp_t
 {
-	uint8	connection;
-	uint16	result;
+	uint8_t	connection;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_attclient_indicated_evt_t
 {
-	uint8	connection;
-	uint16	attrhandle;
+	uint8_t	connection;
+	uint16_t	attrhandle;
 });
 
 PACKSTRUCT(struct ble_msg_attclient_procedure_completed_evt_t
 {
-	uint8	connection;
-	uint16	result;
-	uint16	chrhandle;
+	uint8_t	connection;
+	uint16_t	result;
+	uint16_t	chrhandle;
 });
 
 PACKSTRUCT(struct ble_msg_attclient_group_found_evt_t
 {
-	uint8	connection;
-	uint16	start;
-	uint16	end;
+	uint8_t	connection;
+	uint16_t	start;
+	uint16_t	end;
 	uint8array	uuid;
 });
 
 PACKSTRUCT(struct ble_msg_attclient_attribute_found_evt_t
 {
-	uint8	connection;
-	uint16	chrdecl;
-	uint16	value;
-	uint8	properties;
+	uint8_t	connection;
+	uint16_t	chrdecl;
+	uint16_t	value;
+	uint8_t	properties;
 	uint8array	uuid;
 });
 
 PACKSTRUCT(struct ble_msg_attclient_find_information_found_evt_t
 {
-	uint8	connection;
-	uint16	chrhandle;
+	uint8_t	connection;
+	uint16_t	chrhandle;
 	uint8array	uuid;
 });
 
 PACKSTRUCT(struct ble_msg_attclient_attribute_value_evt_t
 {
-	uint8	connection;
-	uint16	atthandle;
-	uint8	type;
+	uint8_t	connection;
+	uint16_t	atthandle;
+	uint8_t	type;
 	uint8array	value;
 });
 
 PACKSTRUCT(struct ble_msg_attclient_read_multiple_response_evt_t
 {
-	uint8	connection;
+	uint8_t	connection;
 	uint8array	handles;
 });
 
 PACKSTRUCT(struct ble_msg_sm_encrypt_start_cmd_t
 {
-	uint8	handle;
-	uint8	bonding;
+	uint8_t	handle;
+	uint8_t	bonding;
 });
 
 PACKSTRUCT(struct ble_msg_sm_encrypt_start_rsp_t
 {
-	uint8	handle;
-	uint16	result;
+	uint8_t	handle;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_sm_set_bondable_mode_cmd_t
 {
-	uint8	bondable;
+	uint8_t	bondable;
 });
 
 PACKSTRUCT(struct ble_msg_sm_delete_bonding_cmd_t
 {
-	uint8	handle;
+	uint8_t	handle;
 });
 
 PACKSTRUCT(struct ble_msg_sm_delete_bonding_rsp_t
 {
-	uint16	result;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_sm_set_parameters_cmd_t
 {
-	uint8	mitm;
-	uint8	min_key_size;
-	uint8	io_capabilities;
+	uint8_t	mitm;
+	uint8_t	min_key_size;
+	uint8_t	io_capabilities;
 });
 
 PACKSTRUCT(struct ble_msg_sm_passkey_entry_cmd_t
 {
-	uint8	handle;
-	uint32	passkey;
+	uint8_t	handle;
+	uint32_t	passkey;
 });
 
 PACKSTRUCT(struct ble_msg_sm_passkey_entry_rsp_t
 {
-	uint16	result;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_sm_get_bonds_rsp_t
 {
-	uint8	bonds;
+	uint8_t	bonds;
 });
 
 PACKSTRUCT(struct ble_msg_sm_set_oob_data_cmd_t
@@ -1611,182 +1611,182 @@ PACKSTRUCT(struct ble_msg_sm_set_oob_data_cmd_t
 
 PACKSTRUCT(struct ble_msg_sm_whitelist_bonds_rsp_t
 {
-	uint16	result;
-	uint8	count;
+	uint16_t	result;
+	uint8_t	count;
 });
 
 PACKSTRUCT(struct ble_msg_sm_set_pairing_distribution_keys_cmd_t
 {
-	uint8	initiator_keys;
-	uint8	responder_keys;
+	uint8_t	initiator_keys;
+	uint8_t	responder_keys;
 });
 
 PACKSTRUCT(struct ble_msg_sm_set_pairing_distribution_keys_rsp_t
 {
-	uint16	result;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_sm_smp_data_evt_t
 {
-	uint8	handle;
-	uint8	packet;
+	uint8_t	handle;
+	uint8_t	packet;
 	uint8array	data;
 });
 
 PACKSTRUCT(struct ble_msg_sm_bonding_fail_evt_t
 {
-	uint8	handle;
-	uint16	result;
+	uint8_t	handle;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_sm_passkey_display_evt_t
 {
-	uint8	handle;
-	uint32	passkey;
+	uint8_t	handle;
+	uint32_t	passkey;
 });
 
 PACKSTRUCT(struct ble_msg_sm_passkey_request_evt_t
 {
-	uint8	handle;
+	uint8_t	handle;
 });
 
 PACKSTRUCT(struct ble_msg_sm_bond_status_evt_t
 {
-	uint8	bond;
-	uint8	keysize;
-	uint8	mitm;
-	uint8	keys;
+	uint8_t	bond;
+	uint8_t	keysize;
+	uint8_t	mitm;
+	uint8_t	keys;
 });
 
 PACKSTRUCT(struct ble_msg_gap_set_privacy_flags_cmd_t
 {
-	uint8	peripheral_privacy;
-	uint8	central_privacy;
+	uint8_t	peripheral_privacy;
+	uint8_t	central_privacy;
 });
 
 PACKSTRUCT(struct ble_msg_gap_set_mode_cmd_t
 {
-	uint8	discover;
-	uint8	connect;
+	uint8_t	discover;
+	uint8_t	connect;
 });
 
 PACKSTRUCT(struct ble_msg_gap_set_mode_rsp_t
 {
-	uint16	result;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_gap_discover_cmd_t
 {
-	uint8	mode;
+	uint8_t	mode;
 });
 
 PACKSTRUCT(struct ble_msg_gap_discover_rsp_t
 {
-	uint16	result;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_gap_connect_direct_cmd_t
 {
 	bd_addr	address;
-	uint8	addr_type;
-	uint16	conn_interval_min;
-	uint16	conn_interval_max;
-	uint16	timeout;
-	uint16	latency;
+	uint8_t	addr_type;
+	uint16_t	conn_interval_min;
+	uint16_t	conn_interval_max;
+	uint16_t	timeout;
+	uint16_t	latency;
 });
 
 PACKSTRUCT(struct ble_msg_gap_connect_direct_rsp_t
 {
-	uint16	result;
-	uint8	connection_handle;
+	uint16_t	result;
+	uint8_t	connection_handle;
 });
 
 PACKSTRUCT(struct ble_msg_gap_end_procedure_rsp_t
 {
-	uint16	result;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_gap_connect_selective_cmd_t
 {
-	uint16	conn_interval_min;
-	uint16	conn_interval_max;
-	uint16	timeout;
-	uint16	latency;
+	uint16_t	conn_interval_min;
+	uint16_t	conn_interval_max;
+	uint16_t	timeout;
+	uint16_t	latency;
 });
 
 PACKSTRUCT(struct ble_msg_gap_connect_selective_rsp_t
 {
-	uint16	result;
-	uint8	connection_handle;
+	uint16_t	result;
+	uint8_t	connection_handle;
 });
 
 PACKSTRUCT(struct ble_msg_gap_set_filtering_cmd_t
 {
-	uint8	scan_policy;
-	uint8	adv_policy;
-	uint8	scan_duplicate_filtering;
+	uint8_t	scan_policy;
+	uint8_t	adv_policy;
+	uint8_t	scan_duplicate_filtering;
 });
 
 PACKSTRUCT(struct ble_msg_gap_set_filtering_rsp_t
 {
-	uint16	result;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_gap_set_scan_parameters_cmd_t
 {
-	uint16	scan_interval;
-	uint16	scan_window;
-	uint8	active;
+	uint16_t	scan_interval;
+	uint16_t	scan_window;
+	uint8_t	active;
 });
 
 PACKSTRUCT(struct ble_msg_gap_set_scan_parameters_rsp_t
 {
-	uint16	result;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_gap_set_adv_parameters_cmd_t
 {
-	uint16	adv_interval_min;
-	uint16	adv_interval_max;
-	uint8	adv_channels;
+	uint16_t	adv_interval_min;
+	uint16_t	adv_interval_max;
+	uint8_t	adv_channels;
 });
 
 PACKSTRUCT(struct ble_msg_gap_set_adv_parameters_rsp_t
 {
-	uint16	result;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_gap_set_adv_data_cmd_t
 {
-	uint8	set_scanrsp;
+	uint8_t	set_scanrsp;
 	uint8array	adv_data;
 });
 
 PACKSTRUCT(struct ble_msg_gap_set_adv_data_rsp_t
 {
-	uint16	result;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_gap_set_directed_connectable_mode_cmd_t
 {
 	bd_addr	address;
-	uint8	addr_type;
+	uint8_t	addr_type;
 });
 
 PACKSTRUCT(struct ble_msg_gap_set_directed_connectable_mode_rsp_t
 {
-	uint16	result;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_gap_set_initiating_con_parameters_cmd_t
 {
-	uint16	scan_interval;
-	uint16	scan_window;
+	uint16_t	scan_interval;
+	uint16_t	scan_window;
 });
 
 PACKSTRUCT(struct ble_msg_gap_set_initiating_con_parameters_rsp_t
 {
-	uint16	result;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_gap_set_nonresolvable_address_cmd_t
@@ -1796,299 +1796,299 @@ PACKSTRUCT(struct ble_msg_gap_set_nonresolvable_address_cmd_t
 
 PACKSTRUCT(struct ble_msg_gap_set_nonresolvable_address_rsp_t
 {
-	uint16	result;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_gap_scan_response_evt_t
 {
-	int8	rssi;
-	uint8	packet_type;
+	int8_t	rssi;
+	uint8_t	packet_type;
 	bd_addr	sender;
-	uint8	address_type;
-	uint8	bond;
+	uint8_t	address_type;
+	uint8_t	bond;
 	uint8array	data;
 });
 
 PACKSTRUCT(struct ble_msg_gap_mode_changed_evt_t
 {
-	uint8	discover;
-	uint8	connect;
+	uint8_t	discover;
+	uint8_t	connect;
 });
 
 PACKSTRUCT(struct ble_msg_hardware_io_port_config_irq_cmd_t
 {
-	uint8	port;
-	uint8	enable_bits;
-	uint8	falling_edge;
+	uint8_t	port;
+	uint8_t	enable_bits;
+	uint8_t	falling_edge;
 });
 
 PACKSTRUCT(struct ble_msg_hardware_io_port_config_irq_rsp_t
 {
-	uint16	result;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_hardware_set_soft_timer_cmd_t
 {
-	uint32	time;
-	uint8	handle;
-	uint8	single_shot;
+	uint32_t	time;
+	uint8_t	handle;
+	uint8_t	single_shot;
 });
 
 PACKSTRUCT(struct ble_msg_hardware_set_soft_timer_rsp_t
 {
-	uint16	result;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_hardware_adc_read_cmd_t
 {
-	uint8	input;
-	uint8	decimation;
-	uint8	reference_selection;
+	uint8_t	input;
+	uint8_t	decimation;
+	uint8_t	reference_selection;
 });
 
 PACKSTRUCT(struct ble_msg_hardware_adc_read_rsp_t
 {
-	uint16	result;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_hardware_io_port_config_direction_cmd_t
 {
-	uint8	port;
-	uint8	direction;
+	uint8_t	port;
+	uint8_t	direction;
 });
 
 PACKSTRUCT(struct ble_msg_hardware_io_port_config_direction_rsp_t
 {
-	uint16	result;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_hardware_io_port_config_function_cmd_t
 {
-	uint8	port;
-	uint8	function;
+	uint8_t	port;
+	uint8_t	function;
 });
 
 PACKSTRUCT(struct ble_msg_hardware_io_port_config_function_rsp_t
 {
-	uint16	result;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_hardware_io_port_config_pull_cmd_t
 {
-	uint8	port;
-	uint8	tristate_mask;
-	uint8	pull_up;
+	uint8_t	port;
+	uint8_t	tristate_mask;
+	uint8_t	pull_up;
 });
 
 PACKSTRUCT(struct ble_msg_hardware_io_port_config_pull_rsp_t
 {
-	uint16	result;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_hardware_io_port_write_cmd_t
 {
-	uint8	port;
-	uint8	mask;
-	uint8	data;
+	uint8_t	port;
+	uint8_t	mask;
+	uint8_t	data;
 });
 
 PACKSTRUCT(struct ble_msg_hardware_io_port_write_rsp_t
 {
-	uint16	result;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_hardware_io_port_read_cmd_t
 {
-	uint8	port;
-	uint8	mask;
+	uint8_t	port;
+	uint8_t	mask;
 });
 
 PACKSTRUCT(struct ble_msg_hardware_io_port_read_rsp_t
 {
-	uint16	result;
-	uint8	port;
-	uint8	data;
+	uint16_t	result;
+	uint8_t	port;
+	uint8_t	data;
 });
 
 PACKSTRUCT(struct ble_msg_hardware_spi_config_cmd_t
 {
-	uint8	channel;
-	uint8	polarity;
-	uint8	phase;
-	uint8	bit_order;
-	uint8	baud_e;
-	uint8	baud_m;
+	uint8_t	channel;
+	uint8_t	polarity;
+	uint8_t	phase;
+	uint8_t	bit_order;
+	uint8_t	baud_e;
+	uint8_t	baud_m;
 });
 
 PACKSTRUCT(struct ble_msg_hardware_spi_config_rsp_t
 {
-	uint16	result;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_hardware_spi_transfer_cmd_t
 {
-	uint8	channel;
+	uint8_t	channel;
 	uint8array	data;
 });
 
 PACKSTRUCT(struct ble_msg_hardware_spi_transfer_rsp_t
 {
-	uint16	result;
-	uint8	channel;
+	uint16_t	result;
+	uint8_t	channel;
 	uint8array	data;
 });
 
 PACKSTRUCT(struct ble_msg_hardware_i2c_read_cmd_t
 {
-	uint8	address;
-	uint8	stop;
-	uint8	length;
+	uint8_t	address;
+	uint8_t	stop;
+	uint8_t	length;
 });
 
 PACKSTRUCT(struct ble_msg_hardware_i2c_read_rsp_t
 {
-	uint16	result;
+	uint16_t	result;
 	uint8array	data;
 });
 
 PACKSTRUCT(struct ble_msg_hardware_i2c_write_cmd_t
 {
-	uint8	address;
-	uint8	stop;
+	uint8_t	address;
+	uint8_t	stop;
 	uint8array	data;
 });
 
 PACKSTRUCT(struct ble_msg_hardware_i2c_write_rsp_t
 {
-	uint8	written;
+	uint8_t	written;
 });
 
 PACKSTRUCT(struct ble_msg_hardware_set_txpower_cmd_t
 {
-	uint8	power;
+	uint8_t	power;
 });
 
 PACKSTRUCT(struct ble_msg_hardware_timer_comparator_cmd_t
 {
-	uint8	timer;
-	uint8	channel;
-	uint8	mode;
-	uint16	comparator_value;
+	uint8_t	timer;
+	uint8_t	channel;
+	uint8_t	mode;
+	uint16_t	comparator_value;
 });
 
 PACKSTRUCT(struct ble_msg_hardware_timer_comparator_rsp_t
 {
-	uint16	result;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_hardware_io_port_irq_enable_cmd_t
 {
-	uint8	port;
-	uint8	enable_bits;
+	uint8_t	port;
+	uint8_t	enable_bits;
 });
 
 PACKSTRUCT(struct ble_msg_hardware_io_port_irq_enable_rsp_t
 {
-	uint16	result;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_hardware_io_port_irq_direction_cmd_t
 {
-	uint8	port;
-	uint8	falling_edge;
+	uint8_t	port;
+	uint8_t	falling_edge;
 });
 
 PACKSTRUCT(struct ble_msg_hardware_io_port_irq_direction_rsp_t
 {
-	uint16	result;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_hardware_analog_comparator_enable_cmd_t
 {
-	uint8	enable;
+	uint8_t	enable;
 });
 
 PACKSTRUCT(struct ble_msg_hardware_analog_comparator_read_rsp_t
 {
-	uint16	result;
-	uint8	output;
+	uint16_t	result;
+	uint8_t	output;
 });
 
 PACKSTRUCT(struct ble_msg_hardware_analog_comparator_config_irq_cmd_t
 {
-	uint8	enabled;
+	uint8_t	enabled;
 });
 
 PACKSTRUCT(struct ble_msg_hardware_analog_comparator_config_irq_rsp_t
 {
-	uint16	result;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_hardware_set_rxgain_cmd_t
 {
-	uint8	gain;
+	uint8_t	gain;
 });
 
 PACKSTRUCT(struct ble_msg_hardware_usb_enable_cmd_t
 {
-	uint8	enable;
+	uint8_t	enable;
 });
 
 PACKSTRUCT(struct ble_msg_hardware_usb_enable_rsp_t
 {
-	uint16	result;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_hardware_sleep_enable_cmd_t
 {
-	uint8	enable;
+	uint8_t	enable;
 });
 
 PACKSTRUCT(struct ble_msg_hardware_sleep_enable_rsp_t
 {
-	uint16	result;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_hardware_io_port_status_evt_t
 {
-	uint32	timestamp;
-	uint8	port;
-	uint8	irq;
-	uint8	state;
+	uint32_t	timestamp;
+	uint8_t	port;
+	uint8_t	irq;
+	uint8_t	state;
 });
 
 PACKSTRUCT(struct ble_msg_hardware_soft_timer_evt_t
 {
-	uint8	handle;
+	uint8_t	handle;
 });
 
 PACKSTRUCT(struct ble_msg_hardware_adc_result_evt_t
 {
-	uint8	input;
-	int16	value;
+	uint8_t	input;
+	int16_t	value;
 });
 
 PACKSTRUCT(struct ble_msg_hardware_analog_comparator_status_evt_t
 {
-	uint32	timestamp;
-	uint8	output;
+	uint32_t	timestamp;
+	uint8_t	output;
 });
 
 PACKSTRUCT(struct ble_msg_test_phy_tx_cmd_t
 {
-	uint8	channel;
-	uint8	length;
-	uint8	type;
+	uint8_t	channel;
+	uint8_t	length;
+	uint8_t	type;
 });
 
 PACKSTRUCT(struct ble_msg_test_phy_rx_cmd_t
 {
-	uint8	channel;
+	uint8_t	channel;
 });
 
 PACKSTRUCT(struct ble_msg_test_phy_end_rsp_t
 {
-	uint16	counter;
+	uint16_t	counter;
 });
 
 PACKSTRUCT(struct ble_msg_test_get_channel_map_rsp_t
@@ -2098,34 +2098,34 @@ PACKSTRUCT(struct ble_msg_test_get_channel_map_rsp_t
 
 PACKSTRUCT(struct ble_msg_test_debug_cmd_t
 {
-	uint8	opcode;
+	uint8_t	opcode;
 	uint8array	input;
 });
 
 PACKSTRUCT(struct ble_msg_test_debug_rsp_t
 {
-	uint8	opcode;
+	uint8_t	opcode;
 	uint8array	output;
 });
 
 PACKSTRUCT(struct ble_msg_test_channel_mode_cmd_t
 {
-	uint8	mode;
+	uint8_t	mode;
 });
 
 PACKSTRUCT(struct ble_msg_dfu_reset_cmd_t
 {
-	uint8	dfu;
+	uint8_t	dfu;
 });
 
 PACKSTRUCT(struct ble_msg_dfu_flash_set_address_cmd_t
 {
-	uint32	address;
+	uint32_t	address;
 });
 
 PACKSTRUCT(struct ble_msg_dfu_flash_set_address_rsp_t
 {
-	uint16	result;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_dfu_flash_upload_cmd_t
@@ -2135,17 +2135,17 @@ PACKSTRUCT(struct ble_msg_dfu_flash_upload_cmd_t
 
 PACKSTRUCT(struct ble_msg_dfu_flash_upload_rsp_t
 {
-	uint16	result;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_dfu_flash_upload_finish_rsp_t
 {
-	uint16	result;
+	uint16_t	result;
 });
 
 PACKSTRUCT(struct ble_msg_dfu_boot_evt_t
 {
-	uint32	version;
+	uint32_t	version;
 });
 
 PACKSTRUCT(
@@ -2154,7 +2154,7 @@ struct ble_cmd_packet
 	struct ble_header header;
 
 union{
-	uint8 handle;
+	uint8_t handle;
 
 	struct ble_msg_system_reset_cmd_t                          system_reset_cmd;
 	struct ble_msg_system_reg_write_cmd_t                      system_reg_write_cmd;
@@ -2372,7 +2372,7 @@ union{
 	struct ble_msg_dfu_flash_upload_rsp_t                      dfu_flash_upload_rsp;
 	struct ble_msg_dfu_flash_upload_finish_rsp_t               dfu_flash_upload_finish_rsp;
 
-	uint8 payload[128];/*TODO: fix this for getting command size larger*/
+	uint8_t payload[128];/*TODO: fix this for getting command size larger*/
 };
 
 }ALIGNED);
@@ -2384,41 +2384,41 @@ public:
     virtual ~ble() {}
 
     /**Reset device**/
-    inline void cmd_system_reset(uint8 boot_in_dfu) { this->send_message (bglib::ble_cmd_system_reset_idx,boot_in_dfu); }
+    inline void cmd_system_reset(uint8_t boot_in_dfu) { this->send_message (bglib::ble_cmd_system_reset_idx,boot_in_dfu); }
     /**Hello - command for testing**/
     inline void cmd_system_hello() { this->send_message (bglib::ble_cmd_system_hello_idx); }
     /**Get device bluetooth address**/
     inline void cmd_system_address_get() { this->send_message (bglib::ble_cmd_system_address_get_idx); }
     /**write register**/
-    inline void cmd_system_reg_write(uint16 address,uint8 value) { this->send_message (bglib::ble_cmd_system_reg_write_idx,address,value); }
+    inline void cmd_system_reg_write(uint16_t address,uint8_t value) { this->send_message (bglib::ble_cmd_system_reg_write_idx,address,value); }
     /**read register**/
-    inline void cmd_system_reg_read(uint16 address) { this->send_message (bglib::ble_cmd_system_reg_read_idx,address); }
+    inline void cmd_system_reg_read(uint16_t address) { this->send_message (bglib::ble_cmd_system_reg_read_idx,address); }
     /**get and reset packet counters**/
     inline void cmd_system_get_counters() { this->send_message (bglib::ble_cmd_system_get_counters_idx); }
     /**Get status from all connections**/
     inline void cmd_system_get_connections() { this->send_message (bglib::ble_cmd_system_get_connections_idx); }
     /**Read Memory**/
-    inline void cmd_system_read_memory(uint32 address,uint8 length) { this->send_message (bglib::ble_cmd_system_read_memory_idx,address,length); }
+    inline void cmd_system_read_memory(uint32_t address,uint8_t length) { this->send_message (bglib::ble_cmd_system_read_memory_idx,address,length); }
     /**Get Device info**/
     inline void cmd_system_get_info() { this->send_message (bglib::ble_cmd_system_get_info_idx); }
     /**Send data to endpoint, error is returned if endpoint does not have enough space**/
-    inline void cmd_system_endpoint_tx(uint8 endpoint,uint16 data_len,uint8* data_data) { this->send_message (bglib::ble_cmd_system_endpoint_tx_idx,endpoint,data_len,data_data); }
+    inline void cmd_system_endpoint_tx(uint8_t endpoint,uint16_t data_len,uint8_t* data_data) { this->send_message (bglib::ble_cmd_system_endpoint_tx_idx,endpoint,data_len,data_data); }
     /**Add entry to whitelist**/
-    inline void cmd_system_whitelist_append(uint8* address,uint8 address_type) { this->send_message (bglib::ble_cmd_system_whitelist_append_idx,address,address_type); }
+    inline void cmd_system_whitelist_append(uint8_t* address,uint8_t address_type) { this->send_message (bglib::ble_cmd_system_whitelist_append_idx,address,address_type); }
     /**Remove entry from whitelist**/
-    inline void cmd_system_whitelist_remove(uint8* address,uint8 address_type) { this->send_message (bglib::ble_cmd_system_whitelist_remove_idx,address,address_type); }
+    inline void cmd_system_whitelist_remove(uint8_t* address,uint8_t address_type) { this->send_message (bglib::ble_cmd_system_whitelist_remove_idx,address,address_type); }
     /**Add entry to whitelist**/
     inline void cmd_system_whitelist_clear() { this->send_message (bglib::ble_cmd_system_whitelist_clear_idx); }
     /**Read data from endpoint, error is returned if endpoint does not have enough data.**/
-    inline void cmd_system_endpoint_rx(uint8 endpoint,uint8 size) { this->send_message (bglib::ble_cmd_system_endpoint_rx_idx,endpoint,size); }
+    inline void cmd_system_endpoint_rx(uint8_t endpoint,uint8_t size) { this->send_message (bglib::ble_cmd_system_endpoint_rx_idx,endpoint,size); }
     /**Set watermarks on both input and output side**/
-    inline void cmd_system_endpoint_set_watermarks(uint8 endpoint,uint8 rx,uint8 tx) { this->send_message (bglib::ble_cmd_system_endpoint_set_watermarks_idx,endpoint,rx,tx); }
+    inline void cmd_system_endpoint_set_watermarks(uint8_t endpoint,uint8_t rx,uint8_t tx) { this->send_message (bglib::ble_cmd_system_endpoint_set_watermarks_idx,endpoint,rx,tx); }
     /**Set encryption key that will be used with aes_encrypt and aes_decrypt commands.**/
-    inline void cmd_system_aes_setkey(uint16 key_len,uint8* key_data) { this->send_message (bglib::ble_cmd_system_aes_setkey_idx,key_len,key_data); }
+    inline void cmd_system_aes_setkey(uint16_t key_len,uint8_t* key_data) { this->send_message (bglib::ble_cmd_system_aes_setkey_idx,key_len,key_data); }
     /**Encrypt one block of data**/
-    inline void cmd_system_aes_encrypt(uint16 data_len,uint8* data_data) { this->send_message (bglib::ble_cmd_system_aes_encrypt_idx,data_len,data_data); }
+    inline void cmd_system_aes_encrypt(uint16_t data_len,uint8_t* data_data) { this->send_message (bglib::ble_cmd_system_aes_encrypt_idx,data_len,data_data); }
     /**Decrypt one block of data**/
-    inline void cmd_system_aes_decrypt(uint16 data_len,uint8* data_data) { this->send_message (bglib::ble_cmd_system_aes_decrypt_idx,data_len,data_data); }
+    inline void cmd_system_aes_decrypt(uint16_t data_len,uint8_t* data_data) { this->send_message (bglib::ble_cmd_system_aes_decrypt_idx,data_len,data_data); }
     /**Defragment persistent store**/
     inline void cmd_flash_ps_defrag() { this->send_message (bglib::ble_cmd_flash_ps_defrag_idx); }
     /**Dump all ps keys**/
@@ -2426,90 +2426,90 @@ public:
     /**erase all ps keys**/
     inline void cmd_flash_ps_erase_all() { this->send_message (bglib::ble_cmd_flash_ps_erase_all_idx); }
     /**save ps key**/
-    inline void cmd_flash_ps_save(uint16 key,uint16 value_len,uint8* value_data) { this->send_message (bglib::ble_cmd_flash_ps_save_idx,key,value_len,value_data); }
+    inline void cmd_flash_ps_save(uint16_t key,uint16_t value_len,uint8_t* value_data) { this->send_message (bglib::ble_cmd_flash_ps_save_idx,key,value_len,value_data); }
     /**load ps key**/
-    inline void cmd_flash_ps_load(uint16 key) { this->send_message (bglib::ble_cmd_flash_ps_load_idx,key); }
+    inline void cmd_flash_ps_load(uint16_t key) { this->send_message (bglib::ble_cmd_flash_ps_load_idx,key); }
     /**erase ps key**/
-    inline void cmd_flash_ps_erase(uint16 key) { this->send_message (bglib::ble_cmd_flash_ps_erase_idx,key); }
+    inline void cmd_flash_ps_erase(uint16_t key) { this->send_message (bglib::ble_cmd_flash_ps_erase_idx,key); }
     /**erase flash page**/
-    inline void cmd_flash_erase_page(uint8 page) { this->send_message (bglib::ble_cmd_flash_erase_page_idx,page); }
+    inline void cmd_flash_erase_page(uint8_t page) { this->send_message (bglib::ble_cmd_flash_erase_page_idx,page); }
     /**write data to user data area**/
-    inline void cmd_flash_write_data(uint32 address,uint16 data_len,uint8* data_data) { this->send_message (bglib::ble_cmd_flash_write_data_idx,address,data_len,data_data); }
+    inline void cmd_flash_write_data(uint32_t address,uint16_t data_len,uint8_t* data_data) { this->send_message (bglib::ble_cmd_flash_write_data_idx,address,data_len,data_data); }
     /**read data from user data area.**/
-    inline void cmd_flash_read_data(uint32 address,uint8 length) { this->send_message (bglib::ble_cmd_flash_read_data_idx,address,length); }
+    inline void cmd_flash_read_data(uint32_t address,uint8_t length) { this->send_message (bglib::ble_cmd_flash_read_data_idx,address,length); }
     /**Write to attribute database**/
-    inline void cmd_attributes_write(uint16 handle,uint8 offset,uint16 value_len,uint8* value_data) { this->send_message (bglib::ble_cmd_attributes_write_idx,handle,offset,value_len,value_data); }
+    inline void cmd_attributes_write(uint16_t handle,uint8_t offset,uint16_t value_len,uint8_t* value_data) { this->send_message (bglib::ble_cmd_attributes_write_idx,handle,offset,value_len,value_data); }
     /**Read from attribute database**/
-    inline void cmd_attributes_read(uint16 handle,uint16 offset) { this->send_message (bglib::ble_cmd_attributes_read_idx,handle,offset); }
+    inline void cmd_attributes_read(uint16_t handle,uint16_t offset) { this->send_message (bglib::ble_cmd_attributes_read_idx,handle,offset); }
     /**Read attribute type from database**/
-    inline void cmd_attributes_read_type(uint16 handle) { this->send_message (bglib::ble_cmd_attributes_read_type_idx,handle); }
+    inline void cmd_attributes_read_type(uint16_t handle) { this->send_message (bglib::ble_cmd_attributes_read_type_idx,handle); }
     /**Respond to user attribute read request**/
-    inline void cmd_attributes_user_read_response(uint8 connection,uint8 att_error,uint16 value_len,uint8* value_data) { this->send_message (bglib::ble_cmd_attributes_user_read_response_idx,connection,att_error,value_len,value_data); }
+    inline void cmd_attributes_user_read_response(uint8_t connection,uint8_t att_error,uint16_t value_len,uint8_t* value_data) { this->send_message (bglib::ble_cmd_attributes_user_read_response_idx,connection,att_error,value_len,value_data); }
     /**Response to attribute_changed event where reason is user-attribute write.**/
-    inline void cmd_attributes_user_write_response(uint8 connection,uint8 att_error) { this->send_message (bglib::ble_cmd_attributes_user_write_response_idx,connection,att_error); }
+    inline void cmd_attributes_user_write_response(uint8_t connection,uint8_t att_error) { this->send_message (bglib::ble_cmd_attributes_user_write_response_idx,connection,att_error); }
     /**Send notification or indication to remote device.**/
-    inline void cmd_attributes_send(uint8 connection,uint16 handle,uint16 value_len,uint8* value_data) { this->send_message (bglib::ble_cmd_attributes_send_idx,connection,handle,value_len,value_data); }
+    inline void cmd_attributes_send(uint8_t connection,uint16_t handle,uint16_t value_len,uint8_t* value_data) { this->send_message (bglib::ble_cmd_attributes_send_idx,connection,handle,value_len,value_data); }
     /**Disconnect connection, starts a disconnection procedure on connection**/
-    inline void cmd_connection_disconnect(uint8 connection) { this->send_message (bglib::ble_cmd_connection_disconnect_idx,connection); }
+    inline void cmd_connection_disconnect(uint8_t connection) { this->send_message (bglib::ble_cmd_connection_disconnect_idx,connection); }
     /**Get Link RSSI**/
-    inline void cmd_connection_get_rssi(uint8 connection) { this->send_message (bglib::ble_cmd_connection_get_rssi_idx,connection); }
+    inline void cmd_connection_get_rssi(uint8_t connection) { this->send_message (bglib::ble_cmd_connection_get_rssi_idx,connection); }
     /**Update connection parameters**/
-    inline void cmd_connection_update(uint8 connection,uint16 interval_min,uint16 interval_max,uint16 latency,uint16 timeout) { this->send_message (bglib::ble_cmd_connection_update_idx,connection,interval_min,interval_max,latency,timeout); }
+    inline void cmd_connection_update(uint8_t connection,uint16_t interval_min,uint16_t interval_max,uint16_t latency,uint16_t timeout) { this->send_message (bglib::ble_cmd_connection_update_idx,connection,interval_min,interval_max,latency,timeout); }
     /**Request version exchange**/
-    inline void cmd_connection_version_update(uint8 connection) { this->send_message (bglib::ble_cmd_connection_version_update_idx,connection); }
+    inline void cmd_connection_version_update(uint8_t connection) { this->send_message (bglib::ble_cmd_connection_version_update_idx,connection); }
     /**Get Current channel map**/
-    inline void cmd_connection_channel_map_get(uint8 connection) { this->send_message (bglib::ble_cmd_connection_channel_map_get_idx,connection); }
+    inline void cmd_connection_channel_map_get(uint8_t connection) { this->send_message (bglib::ble_cmd_connection_channel_map_get_idx,connection); }
     /**Set Channel map**/
-    inline void cmd_connection_channel_map_set(uint8 connection,uint16 map_len,uint8* map_data) { this->send_message (bglib::ble_cmd_connection_channel_map_set_idx,connection,map_len,map_data); }
+    inline void cmd_connection_channel_map_set(uint8_t connection,uint16_t map_len,uint8_t* map_data) { this->send_message (bglib::ble_cmd_connection_channel_map_set_idx,connection,map_len,map_data); }
     /**Remote feature request**/
-    inline void cmd_connection_features_get(uint8 connection) { this->send_message (bglib::ble_cmd_connection_features_get_idx,connection); }
+    inline void cmd_connection_features_get(uint8_t connection) { this->send_message (bglib::ble_cmd_connection_features_get_idx,connection); }
     /**Get Connection Status Parameters**/
-    inline void cmd_connection_get_status(uint8 connection) { this->send_message (bglib::ble_cmd_connection_get_status_idx,connection); }
+    inline void cmd_connection_get_status(uint8_t connection) { this->send_message (bglib::ble_cmd_connection_get_status_idx,connection); }
     /**Raw TX**/
-    inline void cmd_connection_raw_tx(uint8 connection,uint16 data_len,uint8* data_data) { this->send_message (bglib::ble_cmd_connection_raw_tx_idx,connection,data_len,data_data); }
+    inline void cmd_connection_raw_tx(uint8_t connection,uint16_t data_len,uint8_t* data_data) { this->send_message (bglib::ble_cmd_connection_raw_tx_idx,connection,data_len,data_data); }
     /**Disable or enable slave latency**/
-    inline void cmd_connection_slave_latency_disable(uint8 disable) { this->send_message (bglib::ble_cmd_connection_slave_latency_disable_idx,disable); }
+    inline void cmd_connection_slave_latency_disable(uint8_t disable) { this->send_message (bglib::ble_cmd_connection_slave_latency_disable_idx,disable); }
     /**Discover attributes by type and value**/
-    inline void cmd_attclient_find_by_type_value(uint8 connection,uint16 start,uint16 end,uint16 uuid,uint16 value_len,uint8* value_data) { this->send_message (bglib::ble_cmd_attclient_find_by_type_value_idx,connection,start,end,uuid,value_len,value_data); }
+    inline void cmd_attclient_find_by_type_value(uint8_t connection,uint16_t start,uint16_t end,uint16_t uuid,uint16_t value_len,uint8_t* value_data) { this->send_message (bglib::ble_cmd_attclient_find_by_type_value_idx,connection,start,end,uuid,value_len,value_data); }
     /**Discover attributes by type and value**/
-    inline void cmd_attclient_read_by_group_type(uint8 connection,uint16 start,uint16 end,uint16 uuid_len,uint8* uuid_data) { this->send_message (bglib::ble_cmd_attclient_read_by_group_type_idx,connection,start,end,uuid_len,uuid_data); }
+    inline void cmd_attclient_read_by_group_type(uint8_t connection,uint16_t start,uint16_t end,uint16_t uuid_len,uint8_t* uuid_data) { this->send_message (bglib::ble_cmd_attclient_read_by_group_type_idx,connection,start,end,uuid_len,uuid_data); }
     /**Read all attributes where type matches**/
-    inline void cmd_attclient_read_by_type(uint8 connection,uint16 start,uint16 end,uint16 uuid_len,uint8* uuid_data) { this->send_message (bglib::ble_cmd_attclient_read_by_type_idx,connection,start,end,uuid_len,uuid_data); }
+    inline void cmd_attclient_read_by_type(uint8_t connection,uint16_t start,uint16_t end,uint16_t uuid_len,uint8_t* uuid_data) { this->send_message (bglib::ble_cmd_attclient_read_by_type_idx,connection,start,end,uuid_len,uuid_data); }
     /**Discover Attribute handle and type mappings**/
-    inline void cmd_attclient_find_information(uint8 connection,uint16 start,uint16 end) { this->send_message (bglib::ble_cmd_attclient_find_information_idx,connection,start,end); }
+    inline void cmd_attclient_find_information(uint8_t connection,uint16_t start,uint16_t end) { this->send_message (bglib::ble_cmd_attclient_find_information_idx,connection,start,end); }
     /**Read Characteristic value using handle**/
-    inline void cmd_attclient_read_by_handle(uint8 connection,uint16 chrhandle) { this->send_message (bglib::ble_cmd_attclient_read_by_handle_idx,connection,chrhandle); }
+    inline void cmd_attclient_read_by_handle(uint8_t connection,uint16_t chrhandle) { this->send_message (bglib::ble_cmd_attclient_read_by_handle_idx,connection,chrhandle); }
     /**write data to attribute**/
-    inline void cmd_attclient_attribute_write(uint8 connection,uint16 atthandle,uint16 data_len,uint8* data_data) { this->send_message (bglib::ble_cmd_attclient_attribute_write_idx,connection,atthandle,data_len,data_data); }
+    inline void cmd_attclient_attribute_write(uint8_t connection,uint16_t atthandle,uint16_t data_len,uint8_t* data_data) { this->send_message (bglib::ble_cmd_attclient_attribute_write_idx,connection,atthandle,data_len,data_data); }
     /**write data to attribute using ATT write command**/
-    inline void cmd_attclient_write_command(uint8 connection,uint16 atthandle,uint16 data_len,uint8* data_data) { this->send_message (bglib::ble_cmd_attclient_write_command_idx,connection,atthandle,data_len,data_data); }
+    inline void cmd_attclient_write_command(uint8_t connection,uint16_t atthandle,uint16_t data_len,uint8_t* data_data) { this->send_message (bglib::ble_cmd_attclient_write_command_idx,connection,atthandle,data_len,data_data); }
     /**Send confirmation for received indication, use only if manual indications are enabled**/
-    inline void cmd_attclient_indicate_confirm(uint8 connection) { this->send_message (bglib::ble_cmd_attclient_indicate_confirm_idx,connection); }
+    inline void cmd_attclient_indicate_confirm(uint8_t connection) { this->send_message (bglib::ble_cmd_attclient_indicate_confirm_idx,connection); }
     /**Read Long Characteristic value**/
-    inline void cmd_attclient_read_long(uint8 connection,uint16 chrhandle) { this->send_message (bglib::ble_cmd_attclient_read_long_idx,connection,chrhandle); }
+    inline void cmd_attclient_read_long(uint8_t connection,uint16_t chrhandle) { this->send_message (bglib::ble_cmd_attclient_read_long_idx,connection,chrhandle); }
     /**Send prepare write request to remote host**/
-    inline void cmd_attclient_prepare_write(uint8 connection,uint16 atthandle,uint16 offset,uint16 data_len,uint8* data_data) { this->send_message (bglib::ble_cmd_attclient_prepare_write_idx,connection,atthandle,offset,data_len,data_data); }
+    inline void cmd_attclient_prepare_write(uint8_t connection,uint16_t atthandle,uint16_t offset,uint16_t data_len,uint8_t* data_data) { this->send_message (bglib::ble_cmd_attclient_prepare_write_idx,connection,atthandle,offset,data_len,data_data); }
     /**Send prepare write request to remote host**/
-    inline void cmd_attclient_execute_write(uint8 connection,uint8 commit) { this->send_message (bglib::ble_cmd_attclient_execute_write_idx,connection,commit); }
+    inline void cmd_attclient_execute_write(uint8_t connection,uint8_t commit) { this->send_message (bglib::ble_cmd_attclient_execute_write_idx,connection,commit); }
     /**Read multiple attributes from server**/
-    inline void cmd_attclient_read_multiple(uint8 connection,uint16 handles_len,uint8* handles_data) { this->send_message (bglib::ble_cmd_attclient_read_multiple_idx,connection,handles_len,handles_data); }
+    inline void cmd_attclient_read_multiple(uint8_t connection,uint16_t handles_len,uint8_t* handles_data) { this->send_message (bglib::ble_cmd_attclient_read_multiple_idx,connection,handles_len,handles_data); }
     /**Enable encryption on link**/
-    inline void cmd_sm_encrypt_start(uint8 handle,uint8 bonding) { this->send_message (bglib::ble_cmd_sm_encrypt_start_idx,handle,bonding); }
+    inline void cmd_sm_encrypt_start(uint8_t handle,uint8_t bonding) { this->send_message (bglib::ble_cmd_sm_encrypt_start_idx,handle,bonding); }
     /**Set device to bondable mode**/
-    inline void cmd_sm_set_bondable_mode(uint8 bondable) { this->send_message (bglib::ble_cmd_sm_set_bondable_mode_idx,bondable); }
+    inline void cmd_sm_set_bondable_mode(uint8_t bondable) { this->send_message (bglib::ble_cmd_sm_set_bondable_mode_idx,bondable); }
     /**delete bonding information from ps store**/
-    inline void cmd_sm_delete_bonding(uint8 handle) { this->send_message (bglib::ble_cmd_sm_delete_bonding_idx,handle); }
+    inline void cmd_sm_delete_bonding(uint8_t handle) { this->send_message (bglib::ble_cmd_sm_delete_bonding_idx,handle); }
     /**set pairing requirements**/
-    inline void cmd_sm_set_parameters(uint8 mitm,uint8 min_key_size,uint8 io_capabilities) { this->send_message (bglib::ble_cmd_sm_set_parameters_idx,mitm,min_key_size,io_capabilities); }
+    inline void cmd_sm_set_parameters(uint8_t mitm,uint8_t min_key_size,uint8_t io_capabilities) { this->send_message (bglib::ble_cmd_sm_set_parameters_idx,mitm,min_key_size,io_capabilities); }
     /**Passkey entered**/
-    inline void cmd_sm_passkey_entry(uint8 handle,uint32 passkey) { this->send_message (bglib::ble_cmd_sm_passkey_entry_idx,handle,passkey); }
+    inline void cmd_sm_passkey_entry(uint8_t handle,uint32_t passkey) { this->send_message (bglib::ble_cmd_sm_passkey_entry_idx,handle,passkey); }
     /**List all bonded devices**/
     inline void cmd_sm_get_bonds() { this->send_message (bglib::ble_cmd_sm_get_bonds_idx); }
     /**
     		    Set out-of-band encryption data for device
     		    Device does not allow any other kind of pairing except oob if oob data is set.
     		    **/
-    inline void cmd_sm_set_oob_data(uint16 oob_len,uint8* oob_data) { this->send_message (bglib::ble_cmd_sm_set_oob_data_idx,oob_len,oob_data); }
+    inline void cmd_sm_set_oob_data(uint16_t oob_len,uint8_t* oob_data) { this->send_message (bglib::ble_cmd_sm_set_oob_data_idx,oob_len,oob_data); }
     /**
     				Add all bonded devices with a known public or static address to
     				the whitelist. Previous entries in the whitelist are first
@@ -2520,86 +2520,86 @@ public:
     /**
     				Change keys distribution fields in pairing request and response. By default all keys are distributed.
     			**/
-    inline void cmd_sm_set_pairing_distribution_keys(uint8 initiator_keys,uint8 responder_keys) { this->send_message (bglib::ble_cmd_sm_set_pairing_distribution_keys_idx,initiator_keys,responder_keys); }
+    inline void cmd_sm_set_pairing_distribution_keys(uint8_t initiator_keys,uint8_t responder_keys) { this->send_message (bglib::ble_cmd_sm_set_pairing_distribution_keys_idx,initiator_keys,responder_keys); }
     /**Set GAP central/peripheral privacy flags	
     			**/
-    inline void cmd_gap_set_privacy_flags(uint8 peripheral_privacy,uint8 central_privacy) { this->send_message (bglib::ble_cmd_gap_set_privacy_flags_idx,peripheral_privacy,central_privacy); }
+    inline void cmd_gap_set_privacy_flags(uint8_t peripheral_privacy,uint8_t central_privacy) { this->send_message (bglib::ble_cmd_gap_set_privacy_flags_idx,peripheral_privacy,central_privacy); }
     /**Set discoverable and connectable mode**/
-    inline void cmd_gap_set_mode(uint8 discover,uint8 connect) { this->send_message (bglib::ble_cmd_gap_set_mode_idx,discover,connect); }
+    inline void cmd_gap_set_mode(uint8_t discover,uint8_t connect) { this->send_message (bglib::ble_cmd_gap_set_mode_idx,discover,connect); }
     /**start or stop discover procedure**/
-    inline void cmd_gap_discover(uint8 mode) { this->send_message (bglib::ble_cmd_gap_discover_idx,mode); }
+    inline void cmd_gap_discover(uint8_t mode) { this->send_message (bglib::ble_cmd_gap_discover_idx,mode); }
     /**Direct connection**/
-    inline void cmd_gap_connect_direct(uint8* address,uint8 addr_type,uint16 conn_interval_min,uint16 conn_interval_max,uint16 timeout,uint16 latency) { this->send_message (bglib::ble_cmd_gap_connect_direct_idx,address,addr_type,conn_interval_min,conn_interval_max,timeout,latency); }
+    inline void cmd_gap_connect_direct(uint8_t* address,uint8_t addr_type,uint16_t conn_interval_min,uint16_t conn_interval_max,uint16_t timeout,uint16_t latency) { this->send_message (bglib::ble_cmd_gap_connect_direct_idx,address,addr_type,conn_interval_min,conn_interval_max,timeout,latency); }
     /**End current GAP procedure**/
     inline void cmd_gap_end_procedure() { this->send_message (bglib::ble_cmd_gap_end_procedure_idx); }
     /**Connect to any device on whitelist**/
-    inline void cmd_gap_connect_selective(uint16 conn_interval_min,uint16 conn_interval_max,uint16 timeout,uint16 latency) { this->send_message (bglib::ble_cmd_gap_connect_selective_idx,conn_interval_min,conn_interval_max,timeout,latency); }
+    inline void cmd_gap_connect_selective(uint16_t conn_interval_min,uint16_t conn_interval_max,uint16_t timeout,uint16_t latency) { this->send_message (bglib::ble_cmd_gap_connect_selective_idx,conn_interval_min,conn_interval_max,timeout,latency); }
     /**Set scan and advertising filtering parameters**/
-    inline void cmd_gap_set_filtering(uint8 scan_policy,uint8 adv_policy,uint8 scan_duplicate_filtering) { this->send_message (bglib::ble_cmd_gap_set_filtering_idx,scan_policy,adv_policy,scan_duplicate_filtering); }
+    inline void cmd_gap_set_filtering(uint8_t scan_policy,uint8_t adv_policy,uint8_t scan_duplicate_filtering) { this->send_message (bglib::ble_cmd_gap_set_filtering_idx,scan_policy,adv_policy,scan_duplicate_filtering); }
     /**Set scan parameters**/
-    inline void cmd_gap_set_scan_parameters(uint16 scan_interval,uint16 scan_window,uint8 active) { this->send_message (bglib::ble_cmd_gap_set_scan_parameters_idx,scan_interval,scan_window,active); }
+    inline void cmd_gap_set_scan_parameters(uint16_t scan_interval,uint16_t scan_window,uint8_t active) { this->send_message (bglib::ble_cmd_gap_set_scan_parameters_idx,scan_interval,scan_window,active); }
     /**Set advertising parameters**/
-    inline void cmd_gap_set_adv_parameters(uint16 adv_interval_min,uint16 adv_interval_max,uint8 adv_channels) { this->send_message (bglib::ble_cmd_gap_set_adv_parameters_idx,adv_interval_min,adv_interval_max,adv_channels); }
+    inline void cmd_gap_set_adv_parameters(uint16_t adv_interval_min,uint16_t adv_interval_max,uint8_t adv_channels) { this->send_message (bglib::ble_cmd_gap_set_adv_parameters_idx,adv_interval_min,adv_interval_max,adv_channels); }
     /**Set advertisement or scan response data. Use broadcast mode to advertise data**/
-    inline void cmd_gap_set_adv_data(uint8 set_scanrsp,uint16 adv_data_len,uint8* adv_data_data) { this->send_message (bglib::ble_cmd_gap_set_adv_data_idx,set_scanrsp,adv_data_len,adv_data_data); }
+    inline void cmd_gap_set_adv_data(uint8_t set_scanrsp,uint16_t adv_data_len,uint8_t* adv_data_data) { this->send_message (bglib::ble_cmd_gap_set_adv_data_idx,set_scanrsp,adv_data_len,adv_data_data); }
     /**Sets device to Directed Connectable Mode
                             Uses fast advertisement procedure for 1.28s after which device enters nonconnectable mode. 
                             If device has valid reconnection characteristic value, it is used for connection
                             otherwise passed address and address type are used                        
                 **/
-    inline void cmd_gap_set_directed_connectable_mode(uint8* address,uint8 addr_type) { this->send_message (bglib::ble_cmd_gap_set_directed_connectable_mode_idx,address,addr_type); }
+    inline void cmd_gap_set_directed_connectable_mode(uint8_t* address,uint8_t addr_type) { this->send_message (bglib::ble_cmd_gap_set_directed_connectable_mode_idx,address,addr_type); }
     /**Set Initiating connection scan parameters**/
-    inline void cmd_gap_set_initiating_con_parameters(uint16 scan_interval,uint16 scan_window) { this->send_message (bglib::ble_cmd_gap_set_initiating_con_parameters_idx,scan_interval,scan_window); }
+    inline void cmd_gap_set_initiating_con_parameters(uint16_t scan_interval,uint16_t scan_window) { this->send_message (bglib::ble_cmd_gap_set_initiating_con_parameters_idx,scan_interval,scan_window); }
     /**Set non-resolvable address**/
-    inline void cmd_gap_set_nonresolvable_address(uint8* address) { this->send_message (bglib::ble_cmd_gap_set_nonresolvable_address_idx,address); }
+    inline void cmd_gap_set_nonresolvable_address(uint8_t* address) { this->send_message (bglib::ble_cmd_gap_set_nonresolvable_address_idx,address); }
     /**Configure I/O-port interrupts**/
-    inline void cmd_hardware_io_port_config_irq(uint8 port,uint8 enable_bits,uint8 falling_edge) { this->send_message (bglib::ble_cmd_hardware_io_port_config_irq_idx,port,enable_bits,falling_edge); }
+    inline void cmd_hardware_io_port_config_irq(uint8_t port,uint8_t enable_bits,uint8_t falling_edge) { this->send_message (bglib::ble_cmd_hardware_io_port_config_irq_idx,port,enable_bits,falling_edge); }
     /**Set soft timer to send events**/
-    inline void cmd_hardware_set_soft_timer(uint32 time,uint8 handle,uint8 single_shot) { this->send_message (bglib::ble_cmd_hardware_set_soft_timer_idx,time,handle,single_shot); }
+    inline void cmd_hardware_set_soft_timer(uint32_t time,uint8_t handle,uint8_t single_shot) { this->send_message (bglib::ble_cmd_hardware_set_soft_timer_idx,time,handle,single_shot); }
     /**Read A/D conversion**/
-    inline void cmd_hardware_adc_read(uint8 input,uint8 decimation,uint8 reference_selection) { this->send_message (bglib::ble_cmd_hardware_adc_read_idx,input,decimation,reference_selection); }
+    inline void cmd_hardware_adc_read(uint8_t input,uint8_t decimation,uint8_t reference_selection) { this->send_message (bglib::ble_cmd_hardware_adc_read_idx,input,decimation,reference_selection); }
     /**Configure I/O-port direction**/
-    inline void cmd_hardware_io_port_config_direction(uint8 port,uint8 direction) { this->send_message (bglib::ble_cmd_hardware_io_port_config_direction_idx,port,direction); }
+    inline void cmd_hardware_io_port_config_direction(uint8_t port,uint8_t direction) { this->send_message (bglib::ble_cmd_hardware_io_port_config_direction_idx,port,direction); }
     /**Configure I/O-port function**/
-    inline void cmd_hardware_io_port_config_function(uint8 port,uint8 function) { this->send_message (bglib::ble_cmd_hardware_io_port_config_function_idx,port,function); }
+    inline void cmd_hardware_io_port_config_function(uint8_t port,uint8_t function) { this->send_message (bglib::ble_cmd_hardware_io_port_config_function_idx,port,function); }
     /**Configure I/O-port pull-up/pull-down**/
-    inline void cmd_hardware_io_port_config_pull(uint8 port,uint8 tristate_mask,uint8 pull_up) { this->send_message (bglib::ble_cmd_hardware_io_port_config_pull_idx,port,tristate_mask,pull_up); }
+    inline void cmd_hardware_io_port_config_pull(uint8_t port,uint8_t tristate_mask,uint8_t pull_up) { this->send_message (bglib::ble_cmd_hardware_io_port_config_pull_idx,port,tristate_mask,pull_up); }
     /**Write I/O-port**/
-    inline void cmd_hardware_io_port_write(uint8 port,uint8 mask,uint8 data) { this->send_message (bglib::ble_cmd_hardware_io_port_write_idx,port,mask,data); }
+    inline void cmd_hardware_io_port_write(uint8_t port,uint8_t mask,uint8_t data) { this->send_message (bglib::ble_cmd_hardware_io_port_write_idx,port,mask,data); }
     /**Read I/O-port**/
-    inline void cmd_hardware_io_port_read(uint8 port,uint8 mask) { this->send_message (bglib::ble_cmd_hardware_io_port_read_idx,port,mask); }
+    inline void cmd_hardware_io_port_read(uint8_t port,uint8_t mask) { this->send_message (bglib::ble_cmd_hardware_io_port_read_idx,port,mask); }
     /**Configure SPI**/
-    inline void cmd_hardware_spi_config(uint8 channel,uint8 polarity,uint8 phase,uint8 bit_order,uint8 baud_e,uint8 baud_m) { this->send_message (bglib::ble_cmd_hardware_spi_config_idx,channel,polarity,phase,bit_order,baud_e,baud_m); }
+    inline void cmd_hardware_spi_config(uint8_t channel,uint8_t polarity,uint8_t phase,uint8_t bit_order,uint8_t baud_e,uint8_t baud_m) { this->send_message (bglib::ble_cmd_hardware_spi_config_idx,channel,polarity,phase,bit_order,baud_e,baud_m); }
     /**Transfer SPI data**/
-    inline void cmd_hardware_spi_transfer(uint8 channel,uint16 data_len,uint8* data_data) { this->send_message (bglib::ble_cmd_hardware_spi_transfer_idx,channel,data_len,data_data); }
+    inline void cmd_hardware_spi_transfer(uint8_t channel,uint16_t data_len,uint8_t* data_data) { this->send_message (bglib::ble_cmd_hardware_spi_transfer_idx,channel,data_len,data_data); }
     /**Read data from I2C bus using bit-bang in cc2540. I2C clk is in P1.7 data in P1.6. Pull-up must be enabled on pins**/
-    inline void cmd_hardware_i2c_read(uint8 address,uint8 stop,uint8 length) { this->send_message (bglib::ble_cmd_hardware_i2c_read_idx,address,stop,length); }
+    inline void cmd_hardware_i2c_read(uint8_t address,uint8_t stop,uint8_t length) { this->send_message (bglib::ble_cmd_hardware_i2c_read_idx,address,stop,length); }
     /**Write data to I2C bus using bit-bang in cc2540. I2C clk is in P1.7 data in P1.6. Pull-up must be enabled on pins**/
-    inline void cmd_hardware_i2c_write(uint8 address,uint8 stop,uint16 data_len,uint8* data_data) { this->send_message (bglib::ble_cmd_hardware_i2c_write_idx,address,stop,data_len,data_data); }
+    inline void cmd_hardware_i2c_write(uint8_t address,uint8_t stop,uint16_t data_len,uint8_t* data_data) { this->send_message (bglib::ble_cmd_hardware_i2c_write_idx,address,stop,data_len,data_data); }
     /**Set TX Power**/
-    inline void cmd_hardware_set_txpower(uint8 power) { this->send_message (bglib::ble_cmd_hardware_set_txpower_idx,power); }
+    inline void cmd_hardware_set_txpower(uint8_t power) { this->send_message (bglib::ble_cmd_hardware_set_txpower_idx,power); }
     /**Set comparator for timer channel**/
-    inline void cmd_hardware_timer_comparator(uint8 timer,uint8 channel,uint8 mode,uint16 comparator_value) { this->send_message (bglib::ble_cmd_hardware_timer_comparator_idx,timer,channel,mode,comparator_value); }
+    inline void cmd_hardware_timer_comparator(uint8_t timer,uint8_t channel,uint8_t mode,uint16_t comparator_value) { this->send_message (bglib::ble_cmd_hardware_timer_comparator_idx,timer,channel,mode,comparator_value); }
     /**Enable I/O-port interrupts**/
-    inline void cmd_hardware_io_port_irq_enable(uint8 port,uint8 enable_bits) { this->send_message (bglib::ble_cmd_hardware_io_port_irq_enable_idx,port,enable_bits); }
+    inline void cmd_hardware_io_port_irq_enable(uint8_t port,uint8_t enable_bits) { this->send_message (bglib::ble_cmd_hardware_io_port_irq_enable_idx,port,enable_bits); }
     /**Set I/O-port interrupt direction**/
-    inline void cmd_hardware_io_port_irq_direction(uint8 port,uint8 falling_edge) { this->send_message (bglib::ble_cmd_hardware_io_port_irq_direction_idx,port,falling_edge); }
+    inline void cmd_hardware_io_port_irq_direction(uint8_t port,uint8_t falling_edge) { this->send_message (bglib::ble_cmd_hardware_io_port_irq_direction_idx,port,falling_edge); }
     /**Enable or disable analog comparator**/
-    inline void cmd_hardware_analog_comparator_enable(uint8 enable) { this->send_message (bglib::ble_cmd_hardware_analog_comparator_enable_idx,enable); }
+    inline void cmd_hardware_analog_comparator_enable(uint8_t enable) { this->send_message (bglib::ble_cmd_hardware_analog_comparator_enable_idx,enable); }
     /**Read analog comparator output**/
     inline void cmd_hardware_analog_comparator_read() { this->send_message (bglib::ble_cmd_hardware_analog_comparator_read_idx); }
     /**Configure analog comparator interrupt**/
-    inline void cmd_hardware_analog_comparator_config_irq(uint8 enabled) { this->send_message (bglib::ble_cmd_hardware_analog_comparator_config_irq_idx,enabled); }
+    inline void cmd_hardware_analog_comparator_config_irq(uint8_t enabled) { this->send_message (bglib::ble_cmd_hardware_analog_comparator_config_irq_idx,enabled); }
     /**Set RX Sensitivity**/
-    inline void cmd_hardware_set_rxgain(uint8 gain) { this->send_message (bglib::ble_cmd_hardware_set_rxgain_idx,gain); }
+    inline void cmd_hardware_set_rxgain(uint8_t gain) { this->send_message (bglib::ble_cmd_hardware_set_rxgain_idx,gain); }
     /**Enable or disable USB**/
-    inline void cmd_hardware_usb_enable(uint8 enable) { this->send_message (bglib::ble_cmd_hardware_usb_enable_idx,enable); }
+    inline void cmd_hardware_usb_enable(uint8_t enable) { this->send_message (bglib::ble_cmd_hardware_usb_enable_idx,enable); }
     /**Enable or disable sleep mode**/
-    inline void cmd_hardware_sleep_enable(uint8 enable) { this->send_message (bglib::ble_cmd_hardware_sleep_enable_idx,enable); }
+    inline void cmd_hardware_sleep_enable(uint8_t enable) { this->send_message (bglib::ble_cmd_hardware_sleep_enable_idx,enable); }
     /**Start packet transmission, send one packet at every 625us**/
-    inline void cmd_test_phy_tx(uint8 channel,uint8 length,uint8 type) { this->send_message (bglib::ble_cmd_test_phy_tx_idx,channel,length,type); }
+    inline void cmd_test_phy_tx(uint8_t channel,uint8_t length,uint8_t type) { this->send_message (bglib::ble_cmd_test_phy_tx_idx,channel,length,type); }
     /**Start receive test**/
-    inline void cmd_test_phy_rx(uint8 channel) { this->send_message (bglib::ble_cmd_test_phy_rx_idx,channel); }
+    inline void cmd_test_phy_rx(uint8_t channel) { this->send_message (bglib::ble_cmd_test_phy_rx_idx,channel); }
     /**End test, and report received packets**/
     inline void cmd_test_phy_end() { this->send_message (bglib::ble_cmd_test_phy_end_idx); }
     /**Reset test**/
@@ -2607,22 +2607,22 @@ public:
     /**Get current channel quality map**/
     inline void cmd_test_get_channel_map() { this->send_message (bglib::ble_cmd_test_get_channel_map_idx); }
     /**Debug command**/
-    inline void cmd_test_debug(uint8 opcode,uint16 input_len,uint8* input_data) { this->send_message (bglib::ble_cmd_test_debug_idx,opcode,input_len,input_data); }
+    inline void cmd_test_debug(uint8_t opcode,uint16_t input_len,uint8_t* input_data) { this->send_message (bglib::ble_cmd_test_debug_idx,opcode,input_len,input_data); }
     /**Set channel quality measurement mode**/
-    inline void cmd_test_channel_mode(uint8 mode) { this->send_message (bglib::ble_cmd_test_channel_mode_idx,mode); }
+    inline void cmd_test_channel_mode(uint8_t mode) { this->send_message (bglib::ble_cmd_test_channel_mode_idx,mode); }
     /**Reset system**/
-    inline void cmd_dfu_reset(uint8 dfu) { this->send_message (bglib::ble_cmd_dfu_reset_idx,dfu); }
+    inline void cmd_dfu_reset(uint8_t dfu) { this->send_message (bglib::ble_cmd_dfu_reset_idx,dfu); }
     /**set address for flashing**/
-    inline void cmd_dfu_flash_set_address(uint32 address) { this->send_message (bglib::ble_cmd_dfu_flash_set_address_idx,address); }
+    inline void cmd_dfu_flash_set_address(uint32_t address) { this->send_message (bglib::ble_cmd_dfu_flash_set_address_idx,address); }
     /**Upload binary for flashing. Address will be updated automatically.**/
-    inline void cmd_dfu_flash_upload(uint16 data_len,uint8* data_data) { this->send_message (bglib::ble_cmd_dfu_flash_upload_idx,data_len,data_data); }
+    inline void cmd_dfu_flash_upload(uint16_t data_len,uint8_t* data_data) { this->send_message (bglib::ble_cmd_dfu_flash_upload_idx,data_len,data_data); }
     /**Uploading is finished.**/
     inline void cmd_dfu_flash_upload_finish() { this->send_message (bglib::ble_cmd_dfu_flash_upload_finish_idx); }
 
 /*protected:*/
-    void send_message(uint8 msgid,...);
+    void send_message(uint8_t msgid,...);
 
-    virtual void output(uint8 len1,uint8* data1,uint16 len2,uint8* data2) {}
+    virtual void output(uint8_t len1,uint8_t* data1,uint16_t len2,uint8_t* data2) {}
 
     /**Reset device**/
     virtual void rsp_system_reset(const void *nul);
@@ -3082,7 +3082,7 @@ public:
 struct ble_class_handler_t
 {
     const struct ble_msg * const *msgs;
-    uint8 maxhandlers;
+    uint8_t maxhandlers;
 };
 extern const struct ble_class_handler_t ble_class_rsp_handlers[ble_cls_last];
 extern const struct ble_class_handler_t ble_class_evt_handlers[ble_cls_last];            

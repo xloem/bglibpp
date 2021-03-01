@@ -68,7 +68,6 @@ const struct ble_msg * ble_find_msg_hdr(struct ble_header hdr);
 const struct ble_msg * ble_find_msg_hdr_r(struct ble_header hdr);
 const struct ble_msg * ble_get_msg(uint8 idx) ;
 const struct ble_msg * ble_get_msg_hdr(struct ble_header hdr) ;
-extern void (*bglib_output)(uint8 len1,uint8* data1,uint16 len2,uint8* data2);
 
 enum system_endpoints
 {
@@ -2622,6 +2621,8 @@ public:
 
 /*protected:*/
     void send_message(uint8 msgid,...);
+
+    virtual void output(uint8 len1,uint8* data1,uint16 len2,uint8* data2) {}
 
     /**Reset device**/
     virtual void rsp_system_reset(const void *nul);

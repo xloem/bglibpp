@@ -35,12 +35,10 @@
 class ScanExample : public bglib::ble
 {
 public:
-    ScanExample()
+    void init(int serial_handle)
     {
-    }
-    
-    void init()
-    {
+        this->serial_handle = serial_handle;
+
         //stop previous operation
         cmd_gap_end_procedure();
 
@@ -73,57 +71,72 @@ public:
             printf("%02x%s",msg->sender.addr[5-i],i<5?":":"");
         printf("\t%d\n",msg->rssi);
     }
-} scanexample;
 
-
-int serial_handle;
-void output(uint8 len1,uint8* data1,uint16 len2,uint8* data2)
-{
-    int result;
-    if((result = write(serial_handle, data1, len1)) != len1)
-        {
-            printf("ERROR: Writing data. %d\n",result);
-            exit(-1);
-        }
-
-    if((result = write(serial_handle, data2, len2)) != len2)
-        {
-            printf("ERROR: Writing data. %d\n",result);
-            exit(-1);
-        }
-}
-int read_message()
-{
-    int rread;
-    const struct bglib::ble_msg *apimsg;
-    struct bglib::ble_header apihdr;
-    unsigned char data[256];//enough for BLE
-    //read header
-
-    if((rread = read(serial_handle, (unsigned char*)&apihdr, 4)) != 4)
-        {
-            return rread;
-        }
-    //read rest if needed
-    if(apihdr.lolen)
+    int read_message()
     {
-        if((rread = read(serial_handle, 
-                   data,
-                   apihdr.lolen)) != apihdr.lolen)
+        int rread;
+        const struct bglib::ble_msg *apimsg;
+        struct bglib::ble_header apihdr;
+        unsigned char data[256];//enough for BLE
+        //read header
+    
+        if((rread = read(serial_handle, (unsigned char*)&apihdr, 4)) != 4)
             {
                 return rread;
             }
+        //read rest if needed
+        if(apihdr.lolen)
+        {
+            if((rread = read(serial_handle, 
+                       data,
+                       apihdr.lolen)) != apihdr.lolen)
+                {
+                    return rread;
+                }
+        }
+        apimsg=ble_get_msg_hdr(apihdr);
+        if(!apimsg)
+        {
+            printf("ERROR: Message not found:%d:%d\n",(int)apihdr.cls,(int)apihdr.command);
+            return -1;
+        }
+        (this->*(apimsg->handler))(data);
+    
+        return 0;
     }
-    apimsg=ble_get_msg_hdr(apihdr);
-    if(!apimsg)
-    {
-        printf("ERROR: Message not found:%d:%d\n",(int)apihdr.cls,(int)apihdr.command);
-        return -1;
-    }
-    (scanexample.*(apimsg->handler))(data);
 
-    return 0;
-}
+    void run()
+    {
+        //Message loop
+        while(1)
+        {
+            if(read_message())
+            {
+                printf("Error reading message\n");
+                break;
+            }
+        }
+    }
+
+    void output(uint8 len1,uint8* data1,uint16 len2,uint8* data2)
+    {
+        int result;
+        if((result = write(serial_handle, data1, len1)) != len1)
+            {
+                printf("ERROR: Writing data. %d\n",result);
+                exit(-1);
+            }
+    
+        if((result = write(serial_handle, data2, len2)) != len2)
+            {
+                printf("ERROR: Writing data. %d\n",result);
+                exit(-1);
+            }
+    }
+
+    int serial_handle;
+} scanexample;
+
 
 void print_help()
 {
@@ -141,7 +154,7 @@ int main(int argc, char *argv[] )
         exit(-1);
     }
     //snprintf(str,sizeof(str)-1,"\\\\.\\%s",argv[1]);
-    serial_handle = open(argv[1], O_RDWR | O_NOCTTY);
+    int serial_handle = open(argv[1], O_RDWR | O_NOCTTY);
 
 
     if (serial_handle < 0)
@@ -170,19 +183,9 @@ int main(int argc, char *argv[] )
     
     tcsetattr (serial_handle, TCSAFLUSH, &options);
 
-    bglib::bglib_output=output;
+    scanexample.init(serial_handle);
 
-    scanexample.init();
-
-    //Message loop
-    while(1)
-    {
-        if(read_message())
-        {
-            printf("Error reading message\n");
-            break;
-        }
-    }
+    scanexample.run();
 
     return 0;
 }

@@ -2421,9 +2421,9 @@ public:
     /**Send data to endpoint, error is returned if endpoint does not have enough space**/
     inline void cmd_system_endpoint_tx(uint8_t endpoint,uint16_t data_len,uint8_t* data_data) { this->send_message (bglib::ble_cmd_system_endpoint_tx_idx,endpoint,data_len,data_data); }
     /**Add entry to whitelist**/
-    inline void cmd_system_whitelist_append(uint8_t* address,uint8_t address_type) { this->send_message (bglib::ble_cmd_system_whitelist_append_idx,address,address_type); }
+    inline void cmd_system_whitelist_append(hwaddr address,uint8_t address_type) { this->send_message (bglib::ble_cmd_system_whitelist_append_idx,address,address_type); }
     /**Remove entry from whitelist**/
-    inline void cmd_system_whitelist_remove(uint8_t* address,uint8_t address_type) { this->send_message (bglib::ble_cmd_system_whitelist_remove_idx,address,address_type); }
+    inline void cmd_system_whitelist_remove(hwaddr address,uint8_t address_type) { this->send_message (bglib::ble_cmd_system_whitelist_remove_idx,address,address_type); }
     /**Add entry to whitelist**/
     inline void cmd_system_whitelist_clear() { this->send_message (bglib::ble_cmd_system_whitelist_clear_idx); }
     /**Read data from endpoint, error is returned if endpoint does not have enough data.**/
@@ -2546,7 +2546,7 @@ public:
     /**start or stop discover procedure**/
     inline void cmd_gap_discover(uint8_t mode) { this->send_message (bglib::ble_cmd_gap_discover_idx,mode); }
     /**Direct connection**/
-    inline void cmd_gap_connect_direct(uint8_t* address,uint8_t addr_type,uint16_t conn_interval_min,uint16_t conn_interval_max,uint16_t timeout,uint16_t latency) { this->send_message (bglib::ble_cmd_gap_connect_direct_idx,address,addr_type,conn_interval_min,conn_interval_max,timeout,latency); }
+    inline void cmd_gap_connect_direct(hwaddr address,uint8_t addr_type,uint16_t conn_interval_min,uint16_t conn_interval_max,uint16_t timeout,uint16_t latency) { this->send_message (bglib::ble_cmd_gap_connect_direct_idx,address,addr_type,conn_interval_min,conn_interval_max,timeout,latency); }
     /**End current GAP procedure**/
     inline void cmd_gap_end_procedure() { this->send_message (bglib::ble_cmd_gap_end_procedure_idx); }
     /**Connect to any device on whitelist**/
@@ -2564,11 +2564,11 @@ public:
                             If device has valid reconnection characteristic value, it is used for connection
                             otherwise passed address and address type are used                        
                 **/
-    inline void cmd_gap_set_directed_connectable_mode(uint8_t* address,uint8_t addr_type) { this->send_message (bglib::ble_cmd_gap_set_directed_connectable_mode_idx,address,addr_type); }
+    inline void cmd_gap_set_directed_connectable_mode(hwaddr address,uint8_t addr_type) { this->send_message (bglib::ble_cmd_gap_set_directed_connectable_mode_idx,address,addr_type); }
     /**Set Initiating connection scan parameters**/
     inline void cmd_gap_set_initiating_con_parameters(uint16_t scan_interval,uint16_t scan_window) { this->send_message (bglib::ble_cmd_gap_set_initiating_con_parameters_idx,scan_interval,scan_window); }
     /**Set non-resolvable address**/
-    inline void cmd_gap_set_nonresolvable_address(uint8_t* address) { this->send_message (bglib::ble_cmd_gap_set_nonresolvable_address_idx,address); }
+    inline void cmd_gap_set_nonresolvable_address(hwaddr address) { this->send_message (bglib::ble_cmd_gap_set_nonresolvable_address_idx,address); }
     /**Configure I/O-port interrupts**/
     inline void cmd_hardware_io_port_config_irq(uint8_t port,uint8_t enable_bits,uint8_t falling_edge) { this->send_message (bglib::ble_cmd_hardware_io_port_config_irq_idx,port,enable_bits,falling_edge); }
     /**Set soft timer to send events**/

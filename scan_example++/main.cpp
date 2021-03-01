@@ -46,7 +46,7 @@ public:
         cmd_connection_get_status(0);
     }
 
-    void evt_connection_status(const struct bglib::ble_msg_connection_status_evt_t *msg)
+    void evt_connection_status(const bglib::ble_msg_connection_status_evt_t *msg)
     {
         if(msg->flags&bglib::connection_connected)
         {
@@ -59,12 +59,12 @@ public:
         }
     }
     
-    void evt_connection_disconnected(const struct bglib::ble_msg_connection_disconnected_evt_t *msg)
+    void evt_connection_disconnected(const bglib::ble_msg_connection_disconnected_evt_t *msg)
     {
         cmd_connection_get_status(0);
     }
     
-    void evt_gap_scan_response(const struct bglib::ble_msg_gap_scan_response_evt_t *msg)
+    void evt_gap_scan_response(const bglib::ble_msg_gap_scan_response_evt_t *msg)
     {
         int i;
         for(i=0;i<6;i++)
@@ -75,8 +75,8 @@ public:
     int read_message()
     {
         int rread;
-        const struct bglib::ble_msg *apimsg;
-        struct bglib::ble_header apihdr;
+        const bglib::ble_msg *apimsg;
+        bglib::ble_header apihdr;
         unsigned char data[256];//enough for BLE
         //read header
     

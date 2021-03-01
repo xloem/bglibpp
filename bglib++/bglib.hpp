@@ -268,7 +268,7 @@ protected:
     /*****************************************************************************
      *
      *
-     *      Implementatoin Functions: Override These
+     *      Implementation Functions: Override These
      *
      *
      ****************************************************************************/

@@ -30,7 +30,7 @@
 #include <unistd.h>
 #include <termios.h>
 
-#include "../bglib++/bglib.hpp"
+#include <bglib.hpp>
 
 class ScanExample : public bglib::ble
 {

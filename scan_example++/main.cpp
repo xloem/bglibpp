@@ -42,10 +42,10 @@ public:
     void init()
     {
         //stop previous operation
-        ble_cmd_gap_end_procedure();
+        cmd_gap_end_procedure();
 
         //get connection status,current command will be handled in response
-        ble_cmd_connection_get_status(0);
+        cmd_connection_get_status(0);
     }
 
     void evt_connection_status(const struct bglib::ble_msg_connection_status_evt_t *msg)
@@ -53,17 +53,17 @@ public:
         if(msg->flags&bglib::connection_connected)
         {
             printf("#connected -> disconnect\n");
-            ble_cmd_connection_disconnect(msg->connection);
+            cmd_connection_disconnect(msg->connection);
         }else
         {
             printf("#Not connected -> Scan\n");
-            ble_cmd_gap_discover(1);
+            cmd_gap_discover(1);
         }
     }
     
     void evt_connection_disconnected(const struct bglib::ble_msg_connection_disconnected_evt_t *msg)
     {
-        ble_cmd_connection_get_status(0);
+        cmd_connection_get_status(0);
     }
     
     void evt_gap_scan_response(const struct bglib::ble_msg_gap_scan_response_evt_t *msg)

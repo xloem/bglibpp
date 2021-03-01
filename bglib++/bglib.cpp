@@ -1,7 +1,6 @@
-#include <cstdint>
 #include <stdio.h>
 
-#include "cmd_def.hpp"
+#include "bglib.hpp"
 
 namespace bglib {
 

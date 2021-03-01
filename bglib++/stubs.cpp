@@ -7,7 +7,7 @@
  *
  ****************************************************************************/
 
-#include "cmd_def.hpp"
+#include "bglib.hpp"
 
 namespace bglib {
 

@@ -94,7 +94,7 @@ public:
                     return rread;
                 }
         }
-        apimsg=ble_get_msg_hdr(apihdr);
+        apimsg=get_msg_hdr(apihdr);
         if(!apimsg)
         {
             printf("ERROR: Message not found:%d:%d\n",(int)apihdr.cls,(int)apihdr.command);

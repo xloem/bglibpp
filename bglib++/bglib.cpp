@@ -1,11 +1,15 @@
-#include <stdio.h>
+#include <cstdarg>
+#include <cstdio>
 
 #include "bglib.hpp"
 
 namespace bglib {
 
+extern const ble_class_handler_t ble_class_rsp_handlers[ble_cls_last];
+extern const ble_class_handler_t ble_class_evt_handlers[ble_cls_last];            
+
 void (*bglib_output)(uint8_t len1,uint8_t* data1,uint16_t len2,uint8_t* data2)=0;    
-static const ble_msg  apis[]={
+const ble_msg  ble::apis[]={
 	{{(uint8_t)ble_dev_type_ble|(uint8_t)ble_msg_type_cmd|0x0,0x1,ble_cls_system,ble_cmd_system_reset_id}, 0x2, (ble_cmd_handler)&ble::_default},
 	{{(uint8_t)ble_dev_type_ble|(uint8_t)ble_msg_type_cmd|0x0,0x0,ble_cls_system,ble_cmd_system_hello_id}, 0x0, (ble_cmd_handler)&ble::_default},
 	{{(uint8_t)ble_dev_type_ble|(uint8_t)ble_msg_type_cmd|0x0,0x0,ble_cls_system,ble_cmd_system_address_get_id}, 0x0, (ble_cmd_handler)&ble::_default},
@@ -264,11 +268,11 @@ static const ble_msg  apis[]={
 	{{0,0,0,0}, 0, 0}
 };
 
-const ble_msg * ble_get_msg(uint8_t idx)
+const ble_msg * ble::get_msg(uint8_t idx)
 {
-    return &apis[idx];
+    return &ble::apis[idx];
 }
-const ble_msg * ble_find_msg_hdr(ble_header hdr)
+const ble_msg * ble::find_msg_hdr(ble_header hdr)
 {
     const ble_msg *msg=apis;
     
@@ -281,9 +285,9 @@ const ble_msg * ble_find_msg_hdr(ble_header hdr)
     }
     return 0;
 }
-const ble_msg * ble_find_msg_hdr_r(ble_header hdr)
+const ble_msg * ble::find_msg_hdr_r(ble_header hdr)
 {
-    const ble_msg *msg=&apis[sizeof(apis)/sizeof(ble_msg )-1];
+    const ble_msg *msg=&ble::apis[sizeof(apis)/sizeof(ble_msg )-1];
     
     do
     {
@@ -295,7 +299,7 @@ const ble_msg * ble_find_msg_hdr_r(ble_header hdr)
     return 0;
 }
 
-const ble_msg * ble_get_msg_hdr(ble_header hdr)
+const ble_msg * ble::get_msg_hdr(ble_header hdr)
 {
     if((hdr.type_hilen&0x80)==ble_msg_type_evt)
     {
@@ -313,7 +317,7 @@ const ble_msg * ble_get_msg_hdr(ble_header hdr)
             return NULL;
         return ble_class_rsp_handlers[hdr.cls].msgs[hdr.command];        
     }
-    return ble_find_msg_hdr(hdr);
+    return find_msg_hdr(hdr);
 }
 void ble::send_message(uint8_t msgid,...)            
     {
@@ -401,205 +405,205 @@ void ble::send_message(uint8_t msgid,...)
 
 static const ble_msg* const ble_class_system_rsp_handlers[]=
 {
-	&apis[ble_rsp_system_reset_idx],
-	&apis[ble_rsp_system_hello_idx],
-	&apis[ble_rsp_system_address_get_idx],
-	&apis[ble_rsp_system_reg_write_idx],
-	&apis[ble_rsp_system_reg_read_idx],
-	&apis[ble_rsp_system_get_counters_idx],
-	&apis[ble_rsp_system_get_connections_idx],
-	&apis[ble_rsp_system_read_memory_idx],
-	&apis[ble_rsp_system_get_info_idx],
-	&apis[ble_rsp_system_endpoint_tx_idx],
-	&apis[ble_rsp_system_whitelist_append_idx],
-	&apis[ble_rsp_system_whitelist_remove_idx],
-	&apis[ble_rsp_system_whitelist_clear_idx],
-	&apis[ble_rsp_system_endpoint_rx_idx],
-	&apis[ble_rsp_system_endpoint_set_watermarks_idx],
-	&apis[ble_rsp_system_aes_setkey_idx],
-	&apis[ble_rsp_system_aes_encrypt_idx],
-	&apis[ble_rsp_system_aes_decrypt_idx],
+	&ble::apis[ble_rsp_system_reset_idx],
+	&ble::apis[ble_rsp_system_hello_idx],
+	&ble::apis[ble_rsp_system_address_get_idx],
+	&ble::apis[ble_rsp_system_reg_write_idx],
+	&ble::apis[ble_rsp_system_reg_read_idx],
+	&ble::apis[ble_rsp_system_get_counters_idx],
+	&ble::apis[ble_rsp_system_get_connections_idx],
+	&ble::apis[ble_rsp_system_read_memory_idx],
+	&ble::apis[ble_rsp_system_get_info_idx],
+	&ble::apis[ble_rsp_system_endpoint_tx_idx],
+	&ble::apis[ble_rsp_system_whitelist_append_idx],
+	&ble::apis[ble_rsp_system_whitelist_remove_idx],
+	&ble::apis[ble_rsp_system_whitelist_clear_idx],
+	&ble::apis[ble_rsp_system_endpoint_rx_idx],
+	&ble::apis[ble_rsp_system_endpoint_set_watermarks_idx],
+	&ble::apis[ble_rsp_system_aes_setkey_idx],
+	&ble::apis[ble_rsp_system_aes_encrypt_idx],
+	&ble::apis[ble_rsp_system_aes_decrypt_idx],
 };
 static const ble_msg* const ble_class_system_evt_handlers[]=
 {
-	&apis[ble_evt_system_boot_idx],
-	&apis[ble_evt_system_debug_idx],
-	&apis[ble_evt_system_endpoint_watermark_rx_idx],
-	&apis[ble_evt_system_endpoint_watermark_tx_idx],
-	&apis[ble_evt_system_script_failure_idx],
-	&apis[ble_evt_system_no_license_key_idx],
-	&apis[ble_evt_system_protocol_error_idx],
+	&ble::apis[ble_evt_system_boot_idx],
+	&ble::apis[ble_evt_system_debug_idx],
+	&ble::apis[ble_evt_system_endpoint_watermark_rx_idx],
+	&ble::apis[ble_evt_system_endpoint_watermark_tx_idx],
+	&ble::apis[ble_evt_system_script_failure_idx],
+	&ble::apis[ble_evt_system_no_license_key_idx],
+	&ble::apis[ble_evt_system_protocol_error_idx],
 };
 static const ble_msg* const ble_class_flash_rsp_handlers[]=
 {
-	&apis[ble_rsp_flash_ps_defrag_idx],
-	&apis[ble_rsp_flash_ps_dump_idx],
-	&apis[ble_rsp_flash_ps_erase_all_idx],
-	&apis[ble_rsp_flash_ps_save_idx],
-	&apis[ble_rsp_flash_ps_load_idx],
-	&apis[ble_rsp_flash_ps_erase_idx],
-	&apis[ble_rsp_flash_erase_page_idx],
-	&apis[ble_rsp_flash_write_data_idx],
-	&apis[ble_rsp_flash_read_data_idx],
+	&ble::apis[ble_rsp_flash_ps_defrag_idx],
+	&ble::apis[ble_rsp_flash_ps_dump_idx],
+	&ble::apis[ble_rsp_flash_ps_erase_all_idx],
+	&ble::apis[ble_rsp_flash_ps_save_idx],
+	&ble::apis[ble_rsp_flash_ps_load_idx],
+	&ble::apis[ble_rsp_flash_ps_erase_idx],
+	&ble::apis[ble_rsp_flash_erase_page_idx],
+	&ble::apis[ble_rsp_flash_write_data_idx],
+	&ble::apis[ble_rsp_flash_read_data_idx],
 };
 static const ble_msg* const ble_class_flash_evt_handlers[]=
 {
-	&apis[ble_evt_flash_ps_key_idx],
+	&ble::apis[ble_evt_flash_ps_key_idx],
 };
 static const ble_msg* const ble_class_attributes_rsp_handlers[]=
 {
-	&apis[ble_rsp_attributes_write_idx],
-	&apis[ble_rsp_attributes_read_idx],
-	&apis[ble_rsp_attributes_read_type_idx],
-	&apis[ble_rsp_attributes_user_read_response_idx],
-	&apis[ble_rsp_attributes_user_write_response_idx],
-	&apis[ble_rsp_attributes_send_idx],
+	&ble::apis[ble_rsp_attributes_write_idx],
+	&ble::apis[ble_rsp_attributes_read_idx],
+	&ble::apis[ble_rsp_attributes_read_type_idx],
+	&ble::apis[ble_rsp_attributes_user_read_response_idx],
+	&ble::apis[ble_rsp_attributes_user_write_response_idx],
+	&ble::apis[ble_rsp_attributes_send_idx],
 };
 static const ble_msg* const ble_class_attributes_evt_handlers[]=
 {
-	&apis[ble_evt_attributes_value_idx],
-	&apis[ble_evt_attributes_user_read_request_idx],
-	&apis[ble_evt_attributes_status_idx],
+	&ble::apis[ble_evt_attributes_value_idx],
+	&ble::apis[ble_evt_attributes_user_read_request_idx],
+	&ble::apis[ble_evt_attributes_status_idx],
 };
 static const ble_msg* const ble_class_connection_rsp_handlers[]=
 {
-	&apis[ble_rsp_connection_disconnect_idx],
-	&apis[ble_rsp_connection_get_rssi_idx],
-	&apis[ble_rsp_connection_update_idx],
-	&apis[ble_rsp_connection_version_update_idx],
-	&apis[ble_rsp_connection_channel_map_get_idx],
-	&apis[ble_rsp_connection_channel_map_set_idx],
-	&apis[ble_rsp_connection_features_get_idx],
-	&apis[ble_rsp_connection_get_status_idx],
-	&apis[ble_rsp_connection_raw_tx_idx],
-	&apis[ble_rsp_connection_slave_latency_disable_idx],
+	&ble::apis[ble_rsp_connection_disconnect_idx],
+	&ble::apis[ble_rsp_connection_get_rssi_idx],
+	&ble::apis[ble_rsp_connection_update_idx],
+	&ble::apis[ble_rsp_connection_version_update_idx],
+	&ble::apis[ble_rsp_connection_channel_map_get_idx],
+	&ble::apis[ble_rsp_connection_channel_map_set_idx],
+	&ble::apis[ble_rsp_connection_features_get_idx],
+	&ble::apis[ble_rsp_connection_get_status_idx],
+	&ble::apis[ble_rsp_connection_raw_tx_idx],
+	&ble::apis[ble_rsp_connection_slave_latency_disable_idx],
 };
 static const ble_msg* const ble_class_connection_evt_handlers[]=
 {
-	&apis[ble_evt_connection_status_idx],
-	&apis[ble_evt_connection_version_ind_idx],
-	&apis[ble_evt_connection_feature_ind_idx],
-	&apis[ble_evt_connection_raw_rx_idx],
-	&apis[ble_evt_connection_disconnected_idx],
+	&ble::apis[ble_evt_connection_status_idx],
+	&ble::apis[ble_evt_connection_version_ind_idx],
+	&ble::apis[ble_evt_connection_feature_ind_idx],
+	&ble::apis[ble_evt_connection_raw_rx_idx],
+	&ble::apis[ble_evt_connection_disconnected_idx],
 };
 static const ble_msg* const ble_class_attclient_rsp_handlers[]=
 {
-	&apis[ble_rsp_attclient_find_by_type_value_idx],
-	&apis[ble_rsp_attclient_read_by_group_type_idx],
-	&apis[ble_rsp_attclient_read_by_type_idx],
-	&apis[ble_rsp_attclient_find_information_idx],
-	&apis[ble_rsp_attclient_read_by_handle_idx],
-	&apis[ble_rsp_attclient_attribute_write_idx],
-	&apis[ble_rsp_attclient_write_command_idx],
-	&apis[ble_rsp_attclient_indicate_confirm_idx],
-	&apis[ble_rsp_attclient_read_long_idx],
-	&apis[ble_rsp_attclient_prepare_write_idx],
-	&apis[ble_rsp_attclient_execute_write_idx],
-	&apis[ble_rsp_attclient_read_multiple_idx],
+	&ble::apis[ble_rsp_attclient_find_by_type_value_idx],
+	&ble::apis[ble_rsp_attclient_read_by_group_type_idx],
+	&ble::apis[ble_rsp_attclient_read_by_type_idx],
+	&ble::apis[ble_rsp_attclient_find_information_idx],
+	&ble::apis[ble_rsp_attclient_read_by_handle_idx],
+	&ble::apis[ble_rsp_attclient_attribute_write_idx],
+	&ble::apis[ble_rsp_attclient_write_command_idx],
+	&ble::apis[ble_rsp_attclient_indicate_confirm_idx],
+	&ble::apis[ble_rsp_attclient_read_long_idx],
+	&ble::apis[ble_rsp_attclient_prepare_write_idx],
+	&ble::apis[ble_rsp_attclient_execute_write_idx],
+	&ble::apis[ble_rsp_attclient_read_multiple_idx],
 };
 static const ble_msg* const ble_class_attclient_evt_handlers[]=
 {
-	&apis[ble_evt_attclient_indicated_idx],
-	&apis[ble_evt_attclient_procedure_completed_idx],
-	&apis[ble_evt_attclient_group_found_idx],
-	&apis[ble_evt_attclient_attribute_found_idx],
-	&apis[ble_evt_attclient_find_information_found_idx],
-	&apis[ble_evt_attclient_attribute_value_idx],
-	&apis[ble_evt_attclient_read_multiple_response_idx],
+	&ble::apis[ble_evt_attclient_indicated_idx],
+	&ble::apis[ble_evt_attclient_procedure_completed_idx],
+	&ble::apis[ble_evt_attclient_group_found_idx],
+	&ble::apis[ble_evt_attclient_attribute_found_idx],
+	&ble::apis[ble_evt_attclient_find_information_found_idx],
+	&ble::apis[ble_evt_attclient_attribute_value_idx],
+	&ble::apis[ble_evt_attclient_read_multiple_response_idx],
 };
 static const ble_msg* const ble_class_sm_rsp_handlers[]=
 {
-	&apis[ble_rsp_sm_encrypt_start_idx],
-	&apis[ble_rsp_sm_set_bondable_mode_idx],
-	&apis[ble_rsp_sm_delete_bonding_idx],
-	&apis[ble_rsp_sm_set_parameters_idx],
-	&apis[ble_rsp_sm_passkey_entry_idx],
-	&apis[ble_rsp_sm_get_bonds_idx],
-	&apis[ble_rsp_sm_set_oob_data_idx],
-	&apis[ble_rsp_sm_whitelist_bonds_idx],
-	&apis[ble_rsp_sm_set_pairing_distribution_keys_idx],
+	&ble::apis[ble_rsp_sm_encrypt_start_idx],
+	&ble::apis[ble_rsp_sm_set_bondable_mode_idx],
+	&ble::apis[ble_rsp_sm_delete_bonding_idx],
+	&ble::apis[ble_rsp_sm_set_parameters_idx],
+	&ble::apis[ble_rsp_sm_passkey_entry_idx],
+	&ble::apis[ble_rsp_sm_get_bonds_idx],
+	&ble::apis[ble_rsp_sm_set_oob_data_idx],
+	&ble::apis[ble_rsp_sm_whitelist_bonds_idx],
+	&ble::apis[ble_rsp_sm_set_pairing_distribution_keys_idx],
 };
 static const ble_msg* const ble_class_sm_evt_handlers[]=
 {
-	&apis[ble_evt_sm_smp_data_idx],
-	&apis[ble_evt_sm_bonding_fail_idx],
-	&apis[ble_evt_sm_passkey_display_idx],
-	&apis[ble_evt_sm_passkey_request_idx],
-	&apis[ble_evt_sm_bond_status_idx],
+	&ble::apis[ble_evt_sm_smp_data_idx],
+	&ble::apis[ble_evt_sm_bonding_fail_idx],
+	&ble::apis[ble_evt_sm_passkey_display_idx],
+	&ble::apis[ble_evt_sm_passkey_request_idx],
+	&ble::apis[ble_evt_sm_bond_status_idx],
 };
 static const ble_msg* const ble_class_gap_rsp_handlers[]=
 {
-	&apis[ble_rsp_gap_set_privacy_flags_idx],
-	&apis[ble_rsp_gap_set_mode_idx],
-	&apis[ble_rsp_gap_discover_idx],
-	&apis[ble_rsp_gap_connect_direct_idx],
-	&apis[ble_rsp_gap_end_procedure_idx],
-	&apis[ble_rsp_gap_connect_selective_idx],
-	&apis[ble_rsp_gap_set_filtering_idx],
-	&apis[ble_rsp_gap_set_scan_parameters_idx],
-	&apis[ble_rsp_gap_set_adv_parameters_idx],
-	&apis[ble_rsp_gap_set_adv_data_idx],
-	&apis[ble_rsp_gap_set_directed_connectable_mode_idx],
-	&apis[ble_rsp_gap_set_initiating_con_parameters_idx],
-	&apis[ble_rsp_gap_set_nonresolvable_address_idx],
+	&ble::apis[ble_rsp_gap_set_privacy_flags_idx],
+	&ble::apis[ble_rsp_gap_set_mode_idx],
+	&ble::apis[ble_rsp_gap_discover_idx],
+	&ble::apis[ble_rsp_gap_connect_direct_idx],
+	&ble::apis[ble_rsp_gap_end_procedure_idx],
+	&ble::apis[ble_rsp_gap_connect_selective_idx],
+	&ble::apis[ble_rsp_gap_set_filtering_idx],
+	&ble::apis[ble_rsp_gap_set_scan_parameters_idx],
+	&ble::apis[ble_rsp_gap_set_adv_parameters_idx],
+	&ble::apis[ble_rsp_gap_set_adv_data_idx],
+	&ble::apis[ble_rsp_gap_set_directed_connectable_mode_idx],
+	&ble::apis[ble_rsp_gap_set_initiating_con_parameters_idx],
+	&ble::apis[ble_rsp_gap_set_nonresolvable_address_idx],
 };
 static const ble_msg* const ble_class_gap_evt_handlers[]=
 {
-	&apis[ble_evt_gap_scan_response_idx],
-	&apis[ble_evt_gap_mode_changed_idx],
+	&ble::apis[ble_evt_gap_scan_response_idx],
+	&ble::apis[ble_evt_gap_mode_changed_idx],
 };
 static const ble_msg* const ble_class_hardware_rsp_handlers[]=
 {
-	&apis[ble_rsp_hardware_io_port_config_irq_idx],
-	&apis[ble_rsp_hardware_set_soft_timer_idx],
-	&apis[ble_rsp_hardware_adc_read_idx],
-	&apis[ble_rsp_hardware_io_port_config_direction_idx],
-	&apis[ble_rsp_hardware_io_port_config_function_idx],
-	&apis[ble_rsp_hardware_io_port_config_pull_idx],
-	&apis[ble_rsp_hardware_io_port_write_idx],
-	&apis[ble_rsp_hardware_io_port_read_idx],
-	&apis[ble_rsp_hardware_spi_config_idx],
-	&apis[ble_rsp_hardware_spi_transfer_idx],
-	&apis[ble_rsp_hardware_i2c_read_idx],
-	&apis[ble_rsp_hardware_i2c_write_idx],
-	&apis[ble_rsp_hardware_set_txpower_idx],
-	&apis[ble_rsp_hardware_timer_comparator_idx],
-	&apis[ble_rsp_hardware_io_port_irq_enable_idx],
-	&apis[ble_rsp_hardware_io_port_irq_direction_idx],
-	&apis[ble_rsp_hardware_analog_comparator_enable_idx],
-	&apis[ble_rsp_hardware_analog_comparator_read_idx],
-	&apis[ble_rsp_hardware_analog_comparator_config_irq_idx],
-	&apis[ble_rsp_hardware_set_rxgain_idx],
-	&apis[ble_rsp_hardware_usb_enable_idx],
-	&apis[ble_rsp_hardware_sleep_enable_idx],
+	&ble::apis[ble_rsp_hardware_io_port_config_irq_idx],
+	&ble::apis[ble_rsp_hardware_set_soft_timer_idx],
+	&ble::apis[ble_rsp_hardware_adc_read_idx],
+	&ble::apis[ble_rsp_hardware_io_port_config_direction_idx],
+	&ble::apis[ble_rsp_hardware_io_port_config_function_idx],
+	&ble::apis[ble_rsp_hardware_io_port_config_pull_idx],
+	&ble::apis[ble_rsp_hardware_io_port_write_idx],
+	&ble::apis[ble_rsp_hardware_io_port_read_idx],
+	&ble::apis[ble_rsp_hardware_spi_config_idx],
+	&ble::apis[ble_rsp_hardware_spi_transfer_idx],
+	&ble::apis[ble_rsp_hardware_i2c_read_idx],
+	&ble::apis[ble_rsp_hardware_i2c_write_idx],
+	&ble::apis[ble_rsp_hardware_set_txpower_idx],
+	&ble::apis[ble_rsp_hardware_timer_comparator_idx],
+	&ble::apis[ble_rsp_hardware_io_port_irq_enable_idx],
+	&ble::apis[ble_rsp_hardware_io_port_irq_direction_idx],
+	&ble::apis[ble_rsp_hardware_analog_comparator_enable_idx],
+	&ble::apis[ble_rsp_hardware_analog_comparator_read_idx],
+	&ble::apis[ble_rsp_hardware_analog_comparator_config_irq_idx],
+	&ble::apis[ble_rsp_hardware_set_rxgain_idx],
+	&ble::apis[ble_rsp_hardware_usb_enable_idx],
+	&ble::apis[ble_rsp_hardware_sleep_enable_idx],
 };
 static const ble_msg* const ble_class_hardware_evt_handlers[]=
 {
-	&apis[ble_evt_hardware_io_port_status_idx],
-	&apis[ble_evt_hardware_soft_timer_idx],
-	&apis[ble_evt_hardware_adc_result_idx],
-	&apis[ble_evt_hardware_analog_comparator_status_idx],
+	&ble::apis[ble_evt_hardware_io_port_status_idx],
+	&ble::apis[ble_evt_hardware_soft_timer_idx],
+	&ble::apis[ble_evt_hardware_adc_result_idx],
+	&ble::apis[ble_evt_hardware_analog_comparator_status_idx],
 };
 static const ble_msg* const ble_class_test_rsp_handlers[]=
 {
-	&apis[ble_rsp_test_phy_tx_idx],
-	&apis[ble_rsp_test_phy_rx_idx],
-	&apis[ble_rsp_test_phy_end_idx],
-	&apis[ble_rsp_test_phy_reset_idx],
-	&apis[ble_rsp_test_get_channel_map_idx],
-	&apis[ble_rsp_test_debug_idx],
-	&apis[ble_rsp_test_channel_mode_idx],
+	&ble::apis[ble_rsp_test_phy_tx_idx],
+	&ble::apis[ble_rsp_test_phy_rx_idx],
+	&ble::apis[ble_rsp_test_phy_end_idx],
+	&ble::apis[ble_rsp_test_phy_reset_idx],
+	&ble::apis[ble_rsp_test_get_channel_map_idx],
+	&ble::apis[ble_rsp_test_debug_idx],
+	&ble::apis[ble_rsp_test_channel_mode_idx],
 };
 static const ble_msg* const ble_class_dfu_rsp_handlers[]=
 {
-	&apis[ble_rsp_dfu_reset_idx],
-	&apis[ble_rsp_dfu_flash_set_address_idx],
-	&apis[ble_rsp_dfu_flash_upload_idx],
-	&apis[ble_rsp_dfu_flash_upload_finish_idx],
+	&ble::apis[ble_rsp_dfu_reset_idx],
+	&ble::apis[ble_rsp_dfu_flash_set_address_idx],
+	&ble::apis[ble_rsp_dfu_flash_upload_idx],
+	&ble::apis[ble_rsp_dfu_flash_upload_finish_idx],
 };
 static const ble_msg* const ble_class_dfu_evt_handlers[]=
 {
-	&apis[ble_evt_dfu_boot_idx],
+	&ble::apis[ble_evt_dfu_boot_idx],
 };
 const ble_class_handler_t ble_class_rsp_handlers[ble_cls_last]=
 {
